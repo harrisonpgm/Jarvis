@@ -120,6 +120,19 @@ input[type="file"]{display:none}
 <div id="tab-nutrition" style="display:none"><div class="nutri-tab" id="nt"></div></div>
 <div id="tab-content" style="display:none"><div class="ct-top"><input class="ct-in" id="cin" placeholder='"Interstellar, film, with Katie" · "Atomic Habits, book"' onkeydown="if(event.key==='Enter')addCt()"><button class="bg" id="cbtn" onclick="addCt()">+ Add</button></div><div class="cf" id="cfl"></div><div class="cg" id="cgr"></div></div>
 </div>
+<div style="max-width:1120px;margin:0 auto;padding:10px 16px 40px">
+<div style="border-top:1px solid var(--border);padding-top:12px;margin-top:8px">
+<div onclick="document.getElementById('backup-panel').style.display=document.getElementById('backup-panel').style.display==='none'?'block':'none'" style="cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase">⚙ Settings & Backup <span id="bp-arrow" style="font-size:8px">▼</span></div>
+<div id="backup-panel" style="display:none;margin-top:10px">
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+<button onclick="exportBackup()" style="padding:8px 16px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--surface);color:var(--text);font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:var(--sh)">📥 Download Backup</button>
+<label style="padding:8px 16px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--surface);color:var(--text);font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:var(--sh)">📤 Restore Backup<input type="file" accept=".json" onchange="importBackup(this)" style="display:none"></label>
+<button onclick="if(confirm('This will delete ALL your data. Are you sure?')){localStorage.removeItem('jarvisdata');location.reload()}" style="padding:8px 16px;border-radius:var(--rs);border:1.5px solid var(--red);background:var(--red-bg);color:var(--red);font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">🗑 Reset Everything</button>
+</div>
+<div style="font-size:10px;color:var(--dim);line-height:1.5">Your data is saved automatically in your browser. Download a backup before updating Jarvis code, just in case. You can also use this to move your data to another device.</div>
+</div>
+</div>
+</div>
 
 <script>
 // ===== FOOD LIBRARY DEFAULTS =====
@@ -199,6 +212,31 @@ function save(){
 }
 
 function qS(){if(stTimer)clearTimeout(stTimer);stTimer=setTimeout(save,300)}
+
+function exportBackup(){
+  const raw=localStorage.getItem(SK);
+  if(!raw){alert('No data to backup yet');return}
+  const blob=new Blob([raw],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='jarvis-backup-'+new Date().toISOString().split('T')[0]+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  stMsg('✓ Backup downloaded');
+}
+
+function importBackup(input){
+  const file=input.files?.[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const d=JSON.parse(e.target.result);
+      localStorage.setItem(SK,JSON.stringify(d));
+      stMsg('✓ Restored — reloading...');
+      setTimeout(()=>location.reload(),500);
+    }catch(err){alert('Invalid backup file')}
+  };
+  reader.readAsText(file);input.value='';
+}
 
 function genRec(){if(S.lastRec===TK)return;if(!S.recDefs.length)S.recDefs=DR.map((r,i)=>({...r,id:'r'+i}));S.recDefs.forEach(d=>{if(!S.todos.some(t=>t.recurId===d.id&&t.dueDate===TK)&&d.recurType==='daily')S.todos.push({id:uid(),category:d.category,text:d.text,dueDate:TK,completed:false,createdAt:new Date().toISOString(),recurId:d.id,recurType:d.recurType})});S.lastRec=TK;qS()}
 
