@@ -41,7 +41,8 @@ html:not(.light){
 }
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+html{overflow-x:hidden}
 
 /* HEADER */
 #hdr{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:stretch;padding:0 10px;gap:2px}
@@ -78,8 +79,11 @@ html.dark #hdr,html:not(.light) #hdr{background:rgba(23,26,34,.88)}
 
 /* MAIN LAYOUT */
 #main{max-width:1120px;margin:0 auto;padding:10px 16px 40px}
+@media(max-width:480px){#main{padding:10px 10px 40px}}
 .board-grid{display:grid;grid-template-columns:1fr 350px;gap:14px}
 @media(max-width:860px){.board-grid{grid-template-columns:1fr}.rpanel{order:-1}}
+.rpanel{display:flex;flex-direction:column;gap:12px;min-width:0}
+.board-grid>div:first-child{min-width:0}
 
 /* HEALTH ROW */
 .health-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
@@ -122,8 +126,10 @@ html.dark #hdr,html:not(.light) #hdr{background:rgba(23,26,34,.88)}
 
 /* CARDS */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
-.card-h{padding:9px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.card-l{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.card-h{padding:9px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0}
+.card-h>span{min-width:0}
+.card-h>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:1}
+.card-l{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
 
 .slabel{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .slabel-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
@@ -176,29 +182,30 @@ html.dark #hdr,html:not(.light) #hdr{background:rgba(23,26,34,.88)}
 .ch:hover:not(.active){border-color:var(--border2)}
 
 /* ACTIVITY TRACKER */
-.at-r{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--card2)}
+.at-r{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--card2)}
 .at-r:last-child{border-bottom:none}
-.at-i{font-size:18px;width:22px;text-align:center;flex-shrink:0}
+.at-i{font-size:16px;width:20px;text-align:center;flex-shrink:0}
 .at-mid{flex:1;min-width:0}
-.at-nline{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.at-nline{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;gap:6px}
 .at-n{font-size:12px;font-weight:700;letter-spacing:.3px}
-.at-nu{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-weight:700}
-.at-days{display:flex;gap:3px;align-items:center}
-.at-dd{width:17px;height:17px;border-radius:4px;border:1px solid var(--border);background:var(--card2);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .1s;flex-shrink:0}
+.at-nu{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-weight:700;white-space:nowrap}
+.at-days{display:flex;gap:2px;align-items:center}
+.at-dd{width:15px;height:15px;border-radius:3px;border:1px solid var(--border);background:var(--card2);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .1s;flex-shrink:0}
 .at-dd:hover{border-color:var(--border2)}
 .at-dd.done{background:var(--green);color:#fff;border-color:var(--green)}
 .at-dd.today{box-shadow:0 0 0 1.5px var(--gold)}
-.at-actions{display:flex;gap:3px;flex-shrink:0}
-.at-pm{width:26px;height:26px;border:1px solid var(--border);background:var(--surface);border-radius:var(--rx);color:var(--muted);font-size:14px;cursor:pointer;line-height:1;font-family:'DM Sans',sans-serif}
+.at-actions{display:flex;gap:2px;flex-shrink:0}
+.at-pm{width:24px;height:24px;border:1px solid var(--border);background:var(--surface);border-radius:var(--rx);color:var(--muted);font-size:13px;cursor:pointer;line-height:1;font-family:'DM Sans',sans-serif}
 .at-pm:hover{border-color:var(--accent);color:var(--accent)}
+@media(max-width:380px){.at-r{gap:6px}.at-i{width:18px;font-size:15px}.at-pm{width:22px;height:22px}}
 
 /* ACTIVITY SELECTOR (Board) */
-.act-pills{display:flex;gap:5px;padding:8px 10px;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
-.act-pill{flex:1;min-width:56px;padding:7px 6px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--surface);font-size:10.5px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1;transition:all .1s}
+.act-pills{display:flex;gap:4px;padding:8px 10px;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
+.act-pill{flex:1;min-width:48px;padding:7px 4px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--surface);font-size:10.5px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1;transition:all .1s}
 .act-pill:hover:not(.sel){border-color:var(--border2)}
 .act-pill.sel{font-weight:800;box-shadow:0 2px 6px rgba(0,0,0,.1)}
-.act-pill>span:first-child{font-size:16px}
-.act-pill>span:last-child{font-size:10px;letter-spacing:.3px}
+.act-pill>span:first-child{font-size:15px}
+.act-pill>span:last-child{font-size:9.5px;letter-spacing:.3px}
 .act-sug{width:100%;font-size:9.5px;color:var(--muted);text-align:center;padding-top:3px}
 .act-sug b{color:var(--text2)}
 .act-form{padding:10px 12px;border-bottom:1px solid var(--border)}
