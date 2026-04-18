@@ -192,7 +192,43 @@ html.dark #hdr,html:not(.light) #hdr{background:rgba(23,26,34,.88)}
 .at-pm{width:26px;height:26px;border:1px solid var(--border);background:var(--surface);border-radius:var(--rx);color:var(--muted);font-size:14px;cursor:pointer;line-height:1;font-family:'DM Sans',sans-serif}
 .at-pm:hover{border-color:var(--accent);color:var(--accent)}
 
-/* WORKOUT WIDGET */
+/* ACTIVITY SELECTOR (Board) */
+.act-pills{display:flex;gap:5px;padding:8px 10px;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
+.act-pill{flex:1;min-width:56px;padding:7px 6px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--surface);font-size:10.5px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1;transition:all .1s}
+.act-pill:hover:not(.sel){border-color:var(--border2)}
+.act-pill.sel{font-weight:800;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.act-pill>span:first-child{font-size:16px}
+.act-pill>span:last-child{font-size:10px;letter-spacing:.3px}
+.act-sug{width:100%;font-size:9.5px;color:var(--muted);text-align:center;padding-top:3px}
+.act-sug b{color:var(--text2)}
+.act-form{padding:10px 12px;border-bottom:1px solid var(--border)}
+.act-form-title{font-size:10px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.act-form-grid{display:flex;gap:5px;align-items:center}
+.act-inp{flex:1;background:var(--card2);border:1px solid var(--border);border-radius:var(--rx);padding:7px 10px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;min-width:0}
+.act-inp:focus{border-color:var(--accent)}
+.act-section{padding:8px 12px;border-bottom:1px solid var(--border)}
+.act-section-h{font-size:9.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.act-item{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--card2);font-size:11.5px}
+.act-item:last-child{border-bottom:none}
+.act-item-main{flex:1;color:var(--text2)}
+.act-item-sm{font-size:11px;padding:2px 0;color:var(--text2)}
+.act-rest{padding:18px 14px;text-align:center}
+.act-rest-i{font-size:34px;margin-bottom:6px}
+.act-rest-t{font-size:15px;font-weight:800;margin-bottom:4px}
+.act-rest-b{font-size:11.5px;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.act-rest-tips{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.act-rest-tip{padding:7px 8px;background:var(--card2);border-radius:var(--rx);font-size:11px;color:var(--text2);border:1px solid var(--border)}
+.golf-sum{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px}
+.golf-sum-s{text-align:center;padding:6px;background:var(--card2);border-radius:var(--rx)}
+.golf-sum-l{font-size:8.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.golf-sum-v{font-size:16px;font-weight:800;font-family:'JetBrains Mono',monospace}
+.golf-mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(50px,1fr));gap:3px;max-height:180px;overflow-y:auto;padding:3px;background:var(--card2);border-radius:var(--rx)}
+.golf-mini-h{background:var(--surface);border:1px solid var(--border);border-radius:var(--rx);padding:3px;text-align:center;transition:border-color .15s}
+.golf-mini-h.next{border-color:var(--gold);background:var(--gold-bg)}
+.golf-mini-n{font-size:10px;font-weight:700;color:var(--muted)}
+.golf-mini-p{font-size:8px;color:var(--dim);margin-bottom:1px}
+.golf-mini-h input{width:100%;background:none;border:none;text-align:center;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:0;outline:none;color:inherit}
+.golf-mini-h input:focus{color:var(--accent)}
 .wk-sug{font-size:11px;color:var(--muted);padding:6px 12px;border-bottom:1px solid var(--border)}
 .wk-sug b{color:var(--text)}
 .wk-bs{padding:7px 10px;display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
@@ -519,13 +555,11 @@ window.onerror=function(m,s,l,c,e){
         <div class="card" id="ac"></div>
         <div class="card">
           <div class="card-h">
-            <span class="card-l" style="color:var(--accent)">Today's Workout</span>
+            <span class="card-l" style="color:var(--accent)">Today's Activity</span>
             <span style="font-size:10px;color:var(--muted)" id="wp"></span>
           </div>
-          <div class="wk-sug" id="ws"></div>
-          <div class="wk-bs" id="wb"></div>
-          <div id="wbody"></div>
-          <div class="wk-lk"><a onclick="switchTab('workouts')">Full exercise guide →</a></div>
+          <div class="act-pills" id="act-pills"></div>
+          <div id="act-body"></div>
         </div>
         <div class="card">
           <div class="card-h">
@@ -681,6 +715,16 @@ window.onerror=function(m,s,l,c,e){
       <div class="set-help">On holiday days, targets relax to 2,500 cal / 100g protein and the dashboard shows a reminder banner.</div>
     </div>
 
+    <!-- Golf courses -->
+    <div class="set-sec">
+      <div class="set-sec-h">Golf courses</div>
+      <div id="course-list"></div>
+      <div class="set-row2" style="margin-top:8px">
+        <button class="set-btn" onclick="addCourse()">+ Add course</button>
+      </div>
+      <div class="set-help">Saved par templates. When starting a round, picking a course auto-populates the pars so you only enter your score. Chelsfield Lakes is seeded with a best-guess par layout — edit it after your first round for accuracy.</div>
+    </div>
+
     <!-- Backup -->
     <div class="set-sec">
       <div class="set-sec-h">Backup &amp; Restore</div>
@@ -756,7 +800,7 @@ const PS0=new Date('2026-04-13'),SW=129,TW=99;
 let NOW=new Date(),TK='';  // both recomputed in refreshNow()
 
 // Primary state object. `weights`, `injections`, `mood`, `workoutLogs`, `userCal`, `archiveCompleted`,
-// `theme`, `holiMode`, `sync`, `wrDismissed`, `runs`, `rounds` are NEW.
+// `theme`, `holiMode`, `sync`, `wrDismissed`, `runs`, `rounds`, `courses`, `boardAct` are NEW.
 let S={
   todos:[],nutrition:{},content:[],activities:{},foods:[...DF],
   todayWO:null,recDefs:[],lastRecDaily:null,lastRecWeekly:null,
@@ -766,6 +810,8 @@ let S={
   workoutLogs:{},                 // {date: [{ex, sets: [{reps, weight}]}]}
   runs:[],                        // [{id, date, km, timeSec, splits: [sec,...], notes}]
   rounds:[],                      // [{id, date, course, holes:[{par,score}], notes, expanded}]
+  courses:[],                     // [{id, name, holes:[par,par,...], notes}] — par templates
+  boardAct:'gym',                 // 'gym' | 'park' | 'golf' | 'hockey' | 'rest'
   userCal:{},                     // {date: "Event name"} — overrides/adds to DEFAULT_CAL
   archiveCompleted:true,          // hide completed todos older than 3 days
   theme:'auto',                   // 'auto' | 'light' | 'dark'
@@ -851,9 +897,22 @@ function loadState(){
         S.weights=[{date:fmt(PS0),kg:SW}];
         if(S.curWeight!==SW)S.weights.push({date:TK,kg:S.curWeight});
       }
+      // Seed default course library if empty (new install or existing users upgrading)
+      if(!S.courses||!S.courses.length)S.courses=seedCourses();
+      // Migration: an earlier build seeded Chelsfield Lakes with guessed pars.
+      // If the user still has those exact guessed values (hasn't edited them), replace
+      // with the correct scorecard data. Anyone who already edited their pars is left alone.
+      const CHELSFIELD_GUESS=[4,4,3,5,4,4,3,4,5,4,3,4,4,5,3,4,4,4];
+      const c=S.courses.find(x=>x.id==='c-chelsfield');
+      if(c&&JSON.stringify(c.holes)===JSON.stringify(CHELSFIELD_GUESS)){
+        const fixed=seedCourses()[0];
+        c.holes=fixed.holes;c.notes=fixed.notes;
+        save();
+      }
       stMsg('✓ Loaded');
     } else {
       S.weights=[{date:fmt(PS0),kg:SW}];
+      S.courses=seedCourses();
       stMsg('Welcome to Jarvis');
     }
   }catch(e){stMsg('Fresh start')}
@@ -862,11 +921,23 @@ function loadState(){
   renderAll();
 }
 
+// Course templates. Chelsfield Lakes Lakes Course, White (m) tees: par 71, 6112 yards.
+// Per-hole pars verified from the official scorecard.
+function seedCourses(){
+  return [{
+    id:'c-chelsfield',
+    name:'Chelsfield Lakes',
+    holes:[4,3,4,4,3,5,5,4,4, 4,4,4,5,4,3,4,3,4],  // OUT 36 · IN 35 · Total 71 ✓
+    notes:'Lakes Course, White (m) tees · Par 71 · 6112y · CR 69.0 · SR 126'
+  }];
+}
+
 function save(){
   const d={todos:S.todos,nutrition:S.nutrition,content:S.content,activities:S.activities,foods:S.foods,
     todayWO:S.todayWO,recDefs:S.recDefs,lastRecDaily:S.lastRecDaily,lastRecWeekly:S.lastRecWeekly,
     curWeight:S.curWeight,weights:S.weights,injections:S.injections,mood:S.mood,
-    workoutLogs:S.workoutLogs,runs:S.runs,rounds:S.rounds,userCal:S.userCal,archiveCompleted:S.archiveCompleted,
+    workoutLogs:S.workoutLogs,runs:S.runs,rounds:S.rounds,courses:S.courses,boardAct:S.boardAct,
+    userCal:S.userCal,archiveCompleted:S.archiveCompleted,
     theme:S.theme,holiMode:S.holiMode,sync:S.sync,wrDismissed:S.wrDismissed};
   try{localStorage.setItem(SK,JSON.stringify(d));stMsg('✓ Saved')}catch(e){stMsg('⚠ Storage full')}
 }
@@ -1680,74 +1751,303 @@ function renderTodos(){
   el.innerHTML=html;
 }
 
-function renderWO(){
+// Board activity — replaces the old "Today's Workout" card. Lets the user pick
+// what they're actually doing today and shows purpose-built content for it.
+function renderBoardActivity(){
+  const p=ph();
+  const wp=document.getElementById('wp');if(wp)wp.textContent=p.l;
+  const pills=document.getElementById('act-pills');
+  if(!pills)return;
+  const opts=[
+    {k:'gym',    i:'🏋️', l:'Gym',    c:'var(--accent)'},
+    {k:'park',   i:'🏃', l:'Park',   c:'var(--green)'},
+    {k:'golf',   i:'⛳', l:'Golf',   c:'var(--teal)'},
+    {k:'hockey', i:'🏑', l:'Hockey', c:'var(--purple)'},
+    {k:'rest',   i:'🛌', l:'Rest',   c:'var(--muted)'},
+  ];
+  const sug=PS[p.pk][NOW.getDay()]||'';
+  pills.innerHTML=opts.map(o=>
+    `<button class="act-pill ${S.boardAct===o.k?'sel':''}" onclick="setBoardAct('${o.k}')" style="${S.boardAct===o.k?`background:${o.c};border-color:${o.c};color:#fff`:`color:${o.c}`}"><span>${o.i}</span><span>${o.l}</span></button>`
+  ).join('')+(sug?`<div class="act-sug">Suggested: <b>${E(sug)}</b></div>`:'');
+
+  // Render the body based on which activity is selected
+  const body=document.getElementById('act-body');if(!body)return;
+  switch(S.boardAct){
+    case 'gym':    renderBoardGym(body); break;
+    case 'park':   renderBoardPark(body); break;
+    case 'golf':   renderBoardGolf(body); break;
+    case 'hockey': renderBoardHockey(body); break;
+    case 'rest':   renderBoardRest(body); break;
+    default: body.innerHTML='';
+  }
+}
+
+function setBoardAct(a){S.boardAct=a;qS();renderBoardActivity()}
+
+// ---- Gym view on the board (same content as before, rendered inline) ----
+function renderBoardGym(body){
   const p=ph();const key=S.todayWO&&p.keys.includes(S.todayWO)?S.todayWO:p.keys[0];
   if(S.todayWO!==key)S.todayWO=key;
-  const wp=document.getElementById('wp');if(wp)wp.textContent=p.l;
-  const suggestion=PS[p.pk][NOW.getDay()]||'';
-  const ws=document.getElementById('ws');if(ws)ws.innerHTML=`<b>Suggested today:</b> ${E(suggestion)}`;
-  const wb=document.getElementById('wb');
-  if(wb){
-    wb.innerHTML=p.keys.map(k=>{const w=WO[k];return`<button class="wk-b ${key===k?'sel':''}" onclick="S.todayWO='${k}';renderWO()">${E(w.name)}</button>`}).join('');
-  }
-  const wbody=document.getElementById('wbody');if(!wbody)return;
-  const w=WO[key];if(!w){wbody.innerHTML='';return}
-  if(!w.ex.length){wbody.innerHTML=`<div class="we">Rest day — recovery focus. Go for a walk, stretch, hydrate.</div>`;return}
-  let html=`<div class="el">`;
-  w.ex.forEach((ex,i)=>{
-    const isOpen=S.expEx===key+'_'+i;
-    const currentLog=currentSetLog(ex.n);
-    const recent=recentSetLogs(ex.n,3);
-    const escN=E(ex.n).replace(/'/g,'');
-    html+=`<div class="er">
-      <div class="eh" onclick="S.expEx=${isOpen?'null':`'${key}_${i}'`};renderWO()">
-        <div class="en">${i+1}. ${E(ex.n)}</div>
-        <div class="es">${E(ex.s)}</div>
-      </div>`;
-    if(isOpen){
-      html+=`<div class="eb">
-        <div class="em">💪 ${E(ex.m)}</div>
-        <div class="esl">Form cues</div>`;
-      ex.f.forEach(f=>html+=`<div class="est">${E(f)}</div>`);
-      if(ex.x&&ex.x.length){html+=`<div class="esl">Common mistakes</div>`;ex.x.forEach(x=>html+=`<div class="emk">${E(x)}</div>`)}
-      html+=`<div class="epg">📈 ${E(ex.p)}</div>
-        <div class="ert">⏱ Rest: ${E(ex.r)} · Target: ${E(ex.s)} @ ${E(ex.w)}</div>
-        <a class="ev" href="${vidLink(ex.n)}" target="_blank">▶ Video tutorial</a>`;
-      // Recent sessions table
-      if(recent.length){
-        html+=`<div class="set-block" style="background:var(--card2);border:1px solid var(--border);border-left:3px solid var(--accent)">
-          <div class="set-label" style="color:var(--accent)">📅 Recent sessions</div>
-          <table class="hist-tbl"><tbody>`;
-        recent.forEach(r=>{
-          const summary=r.sets.filter(s=>s.reps||s.weight).map(s=>`${s.reps||'?'}×${s.weight||'?'}kg`).join(', ');
-          const dayName=new Date(r.date+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
-          html+=`<tr><td style="color:var(--muted);font-size:10px;padding-right:8px">${E(dayName)}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10.5px">${E(summary||'—')}</td></tr>`;
-        });
-        html+=`</tbody></table></div>`;
-      }
-      // Set logger for today
-      html+=`<div class="set-block">
-          <div class="set-label">📝 Log sets · today</div>`;
-      html+=`<div class="set-rows">`;
-      const sets=currentLog?currentLog.sets:[];
-      sets.forEach((s,si)=>{
-        html+=`<div class="set-row">
-          <span>Set ${si+1}:</span>
-          <input type="number" placeholder="reps" value="${s.reps||''}" oninput="updateSet('${escN}',${si},'reps',this.value)">
-          <span>×</span>
-          <input type="number" step="0.5" placeholder="kg" value="${s.weight||''}" oninput="updateSet('${escN}',${si},'weight',this.value)">
-        </div>`;
-      });
-      html+=`</div>
-          <button class="set-add" onclick="addSetRow('${escN}')">+ Add set</button>
-          ${sets.length?`<button class="set-save" onclick="clearSets('${escN}')">Clear</button>`:''}
-        </div>
-      </div>`;
-    }
-    html+=`</div>`;
-  });
+  const w=WO[key];if(!w){body.innerHTML='';return}
+  let html=`<div class="wk-bs">`;
+  p.keys.forEach(k=>{const sel=key===k;html+=`<button class="wk-b ${sel?'sel':''}" onclick="S.todayWO='${k}';renderBoardActivity()">${E(WO[k].name)}</button>`});
   html+=`</div>`;
-  wbody.innerHTML=html;
+  if(!w.ex.length){html+=`<div class="we">Rest day — recovery focus.</div>`}
+  else{
+    html+=`<div class="el">`;
+    w.ex.forEach((ex,i)=>{
+      const isOpen=S.expEx===key+'_'+i;
+      const currentLog=currentSetLog(ex.n);
+      const recent=recentSetLogs(ex.n,3);
+      const escN=E(ex.n).replace(/'/g,'');
+      const lastSummary=recent.length?recent[0].sets.filter(s=>s.reps||s.weight).map(s=>`${s.reps||'?'}×${s.weight||'?'}kg`).join(', '):'';
+      html+=`<div class="er">
+        <div class="eh" onclick="S.expEx=${isOpen?'null':`'${key}_${i}'`};renderBoardActivity()">
+          <div class="en">${i+1}. ${E(ex.n)}</div>
+          <div class="es">${E(ex.s)}${lastSummary?` <span style="color:var(--accent);font-size:9px;display:block;font-weight:600">last: ${E(lastSummary)}</span>`:''}</div>
+        </div>`;
+      if(isOpen){
+        html+=`<div class="eb">
+          <div class="em">💪 ${E(ex.m)}</div>
+          <div class="esl">Form cues</div>`;
+        ex.f.forEach(f=>html+=`<div class="est">${E(f)}</div>`);
+        if(ex.x&&ex.x.length){html+=`<div class="esl">Common mistakes</div>`;ex.x.forEach(x=>html+=`<div class="emk">${E(x)}</div>`)}
+        html+=`<div class="epg">📈 ${E(ex.p)}</div>
+          <div class="ert">⏱ Rest: ${E(ex.r)} · Target: ${E(ex.s)} @ ${E(ex.w)}</div>
+          <a class="ev" href="${vidLink(ex.n)}" target="_blank">▶ Video tutorial</a>`;
+        if(recent.length){
+          html+=`<div class="set-block" style="background:var(--card2);border:1px solid var(--border);border-left:3px solid var(--accent)">
+            <div class="set-label" style="color:var(--accent)">📅 Recent sessions</div>
+            <table class="hist-tbl"><tbody>`;
+          recent.forEach(r=>{
+            const summary=r.sets.filter(s=>s.reps||s.weight).map(s=>`${s.reps||'?'}×${s.weight||'?'}kg`).join(', ');
+            const dayName=new Date(r.date+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+            html+=`<tr><td style="color:var(--muted);font-size:10px;padding-right:8px">${E(dayName)}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10.5px">${E(summary||'—')}</td></tr>`;
+          });
+          html+=`</tbody></table></div>`;
+        }
+        html+=`<div class="set-block">
+            <div class="set-label">📝 Log sets · today</div>
+            <div class="set-rows">`;
+        const sets=currentLog?currentLog.sets:[];
+        sets.forEach((s,si)=>{
+          html+=`<div class="set-row">
+            <span>Set ${si+1}:</span>
+            <input type="number" placeholder="reps" value="${s.reps||''}" oninput="updateSet('${escN}',${si},'reps',this.value)">
+            <span>×</span>
+            <input type="number" step="0.5" placeholder="kg" value="${s.weight||''}" oninput="updateSet('${escN}',${si},'weight',this.value)">
+          </div>`;
+        });
+        html+=`</div>
+            <button class="set-add" onclick="addSetRow('${escN}')">+ Add set</button>
+            ${sets.length?`<button class="set-save" onclick="clearSets('${escN}')">Clear</button>`:''}
+          </div>
+        </div>`;
+      }
+      html+=`</div>`;
+    });
+    html+=`</div>`;
+  }
+  html+=`<div class="wk-lk"><a onclick="switchTab('workouts')">Full exercise guide →</a></div>`;
+  body.innerHTML=html;
+}
+
+// ---- Park run view ----
+function renderBoardPark(body){
+  const todayRuns=S.runs.filter(r=>r.date===TK);
+  const recent=S.runs.slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,3);
+  let html=`<div class="act-form">
+    <div class="act-form-title">Log a run</div>
+    <div class="act-form-grid">
+      <input type="number" step="0.1" id="brun-km" placeholder="km" class="act-inp">
+      <input type="text" id="brun-time" placeholder="mm:ss" class="act-inp">
+      <button class="bl" onclick="logRunFromBoard()">+ Log</button>
+    </div>
+    <input type="text" id="brun-notes" placeholder="Notes (optional)" class="act-inp" style="width:100%;margin-top:4px">
+  </div>`;
+  if(todayRuns.length){
+    html+=`<div class="act-section"><div class="act-section-h">Today's runs</div>`;
+    todayRuns.forEach(r=>{
+      const paceSec=r.km?Math.round(r.timeSec/r.km):0;
+      const paceStr=paceSec?Math.floor(paceSec/60)+':'+String(paceSec%60).padStart(2,'0'):'—';
+      const timeStr=Math.floor(r.timeSec/60)+':'+String(r.timeSec%60).padStart(2,'0');
+      html+=`<div class="act-item"><div class="act-item-main"><b>${r.km}km</b> · ${E(timeStr)} · ${E(paceStr)}/km${r.notes?' · '+E(r.notes):''}</div><span class="inj-x" onclick="delRun('${r.id}')">×</span></div>`;
+    });
+    html+=`</div>`;
+  }
+  if(recent.length){
+    html+=`<div class="act-section"><div class="act-section-h">Recent</div>`;
+    recent.forEach(r=>{
+      const paceSec=r.km?Math.round(r.timeSec/r.km):0;
+      const paceStr=paceSec?Math.floor(paceSec/60)+':'+String(paceSec%60).padStart(2,'0'):'—';
+      const dayName=new Date(r.date+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+      html+=`<div class="act-item-sm"><span style="color:var(--muted)">${E(dayName)}</span> · <b>${r.km}km</b> · ${E(paceStr)}/km</div>`;
+    });
+    html+=`</div>`;
+  }
+  html+=`<div class="wk-lk"><a onclick="switchTab('workouts')">Full running log →</a></div>`;
+  body.innerHTML=html;
+}
+
+// Log a run directly from the board's park view (minimal inputs)
+function logRunFromBoard(){
+  const km=parseFloat(document.getElementById('brun-km').value);
+  const timeStr=(document.getElementById('brun-time').value||'').trim();
+  const notes=(document.getElementById('brun-notes').value||'').trim();
+  if(isNaN(km)||km<=0){toast('Enter distance','err');return}
+  let timeSec=0;
+  if(timeStr.includes(':')){const[m,s]=timeStr.split(':');timeSec=(parseInt(m)||0)*60+(parseInt(s)||0)}
+  else{timeSec=Math.round((parseFloat(timeStr)||0)*60)}
+  if(timeSec<=0){toast('Enter time as mm:ss','err');return}
+  S.runs.push({id:uid(),date:TK,km,timeSec,notes});
+  const a=S.activities[TK]||[];
+  if(!a.some(x=>x.type==='park'&&x.runId)){
+    a.push({type:'park',time:new Date().toISOString(),runId:S.runs[S.runs.length-1].id});
+    S.activities[TK]=a;
+  }
+  qS();renderBoardActivity();renderAT();renderStreak();
+  toast(`✓ Run logged: ${km}km`);
+}
+
+// ---- Golf view on board ----
+function renderBoardGolf(body){
+  const todayRound=S.rounds.find(r=>r.date===TK);
+  let html='';
+  if(!todayRound){
+    const courseOpts=S.courses.map(c=>`<option value="${c.id}">${E(c.name)}</option>`).join('');
+    html+=`<div class="act-form">
+      <div class="act-form-title">Start a round</div>
+      <div class="act-form-grid">
+        <select id="bround-course" class="act-inp">
+          ${courseOpts}
+          <option value="__custom__">— Custom course —</option>
+        </select>
+        <select id="bround-holes" class="act-inp" style="width:70px"><option value="18">18</option><option value="9">9</option></select>
+        <button class="bl" onclick="startRoundFromBoard()">Start</button>
+      </div>
+    </div>`;
+  } else {
+    const filled=todayRound.holes.filter(h=>h.score!=null&&h.score!=='');
+    const parFilled=todayRound.holes.filter(h=>h.par!=null&&h.par!==''&&h.score!=null&&h.score!=='');
+    const totScore=filled.reduce((s,h)=>s+(parseInt(h.score)||0),0);
+    const totPar=parFilled.reduce((s,h)=>s+(parseInt(h.par)||0),0);
+    const diff=parFilled.length?totScore-totPar:null;
+    const diffStr=diff==null?'':(diff===0?'E':(diff>0?'+'+diff:String(diff)));
+    const diffColor=diff==null?'var(--muted)':(diff<0?'var(--green)':(diff>0?'var(--red)':'var(--muted)'));
+    html+=`<div class="act-section">
+      <div class="act-section-h">Today · ${E(todayRound.course||'Round')}</div>
+      <div class="golf-sum">
+        <div class="golf-sum-s"><div class="golf-sum-l">Holes</div><div class="golf-sum-v">${filled.length}/${todayRound.holes.length}</div></div>
+        <div class="golf-sum-s"><div class="golf-sum-l">Shots</div><div class="golf-sum-v">${totScore||'—'}</div></div>
+        <div class="golf-sum-s"><div class="golf-sum-l">vs Par</div><div class="golf-sum-v" style="color:${diffColor}">${diffStr||'—'}</div></div>
+      </div>`;
+    // Inline mini-scorecard — one input per hole, current hole highlighted
+    const nextHole=todayRound.holes.findIndex(h=>h.score==null||h.score==='');
+    html+=`<div class="golf-mini">`;
+    todayRound.holes.forEach((h,i)=>{
+      const overPar=h.par!=null&&h.par!==''&&h.score!=null&&h.score!==''?(parseInt(h.score)-parseInt(h.par)):null;
+      const col=overPar==null?'var(--text)':(overPar<0?'var(--green)':(overPar>0?'var(--red)':'var(--text)'));
+      const isNext=i===nextHole;
+      html+=`<div class="golf-mini-h ${isNext?'next':''}">
+        <div class="golf-mini-n">${i+1}</div>
+        <div class="golf-mini-p">par ${h.par||'—'}</div>
+        <input type="number" min="1" max="15" value="${h.score??''}" placeholder="—" style="color:${col}" oninput="updateHole('${todayRound.id}',${i},'score',this.value);updateGolfTotals('${todayRound.id}');updateBoardGolfSummary('${todayRound.id}')">
+      </div>`;
+    });
+    html+=`</div>
+      <button class="btn-p" style="margin-top:8px;width:100%" onclick="switchTab('workouts');S.expRound='${todayRound.id}';renderWT()">Open full scorecard →</button>
+    </div>`;
+  }
+  body.innerHTML=html;
+}
+
+// Start round with course-library lookup. If a saved course is picked,
+// pars auto-populate from the template.
+function startRoundFromBoard(){
+  const courseSel=document.getElementById('bround-course');
+  const holes=parseInt(document.getElementById('bround-holes').value)||18;
+  const courseId=courseSel.value;
+  let courseName='Round';
+  let holeArr=Array.from({length:holes},()=>({par:null,score:null}));
+  if(courseId&&courseId!=='__custom__'){
+    const c=S.courses.find(x=>x.id===courseId);
+    if(c){
+      courseName=c.name;
+      // Use saved pars — trim/pad to selected hole count
+      holeArr=Array.from({length:holes},(_,i)=>({par:c.holes[i]||null,score:null}));
+    }
+  } else if(courseId==='__custom__'){
+    const name=prompt('Course name:');
+    if(name===null)return;
+    courseName=name.trim()||'Round';
+  }
+  const round={id:uid(),date:TK,course:courseName,holes:holeArr,notes:''};
+  S.rounds.push(round);
+  const a=S.activities[TK]||[];
+  if(!a.some(x=>x.type==='golf'&&x.roundId)){
+    a.push({type:'golf',time:new Date().toISOString(),roundId:round.id});
+    S.activities[TK]=a;
+  }
+  S.expRound=round.id;
+  qS();renderBoardActivity();renderAT();renderStreak();
+  toast(`✓ Round started at ${courseName}`);
+}
+
+// Light DOM update for the board golf summary without re-rendering the whole thing
+// (so the hole score inputs don't lose focus while you're tapping across them).
+function updateBoardGolfSummary(roundId){
+  const r=S.rounds.find(x=>x.id===roundId);if(!r)return;
+  const filled=r.holes.filter(h=>h.score!=null&&h.score!=='');
+  const parFilled=r.holes.filter(h=>h.par!=null&&h.par!==''&&h.score!=null&&h.score!=='');
+  const totScore=filled.reduce((s,h)=>s+(parseInt(h.score)||0),0);
+  const totPar=parFilled.reduce((s,h)=>s+(parseInt(h.par)||0),0);
+  const diff=parFilled.length?totScore-totPar:null;
+  const diffStr=diff==null?'—':(diff===0?'E':(diff>0?'+'+diff:String(diff)));
+  const diffColor=diff==null?'var(--muted)':(diff<0?'var(--green)':(diff>0?'var(--red)':'var(--muted)'));
+  const sum=document.querySelector('#act-body .golf-sum');if(!sum)return;
+  const cells=sum.querySelectorAll('.golf-sum-v');
+  if(cells[0])cells[0].textContent=`${filled.length}/${r.holes.length}`;
+  if(cells[1])cells[1].textContent=totScore||'—';
+  if(cells[2]){cells[2].textContent=diffStr;cells[2].style.color=diffColor}
+}
+
+// ---- Hockey view ----
+function renderBoardHockey(body){
+  const todayHockey=(S.activities[TK]||[]).filter(a=>a.type==='hockey').length;
+  const wkHockey=gWk(0).reduce((s,d)=>s+((S.activities[fmt(d)]||[]).filter(a=>a.type==='hockey').length),0);
+  let html=`<div class="act-form">
+    <div class="act-form-title">Hockey</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Quick-log a hockey session for today. Add detail (match vs training, result, etc.) in Notes if you want.</div>
+    <input type="text" id="bhock-notes" placeholder="Notes (optional — 'match vs Bromley 3-2' etc)" class="act-inp" style="width:100%;margin-bottom:6px">
+    <button class="bl" style="width:100%" onclick="logHockeyFromBoard()">+ Log hockey session</button>
+  </div>
+  <div class="act-section">
+    <div class="act-section-h">Today: ${todayHockey} · This week: ${wkHockey}</div>
+  </div>`;
+  body.innerHTML=html;
+}
+function logHockeyFromBoard(){
+  const notes=(document.getElementById('bhock-notes')?.value||'').trim();
+  const a=S.activities[TK]||[];
+  a.push({type:'hockey',time:new Date().toISOString(),notes});
+  S.activities[TK]=a;
+  qS();renderBoardActivity();renderAT();renderStreak();
+  toast('✓ Hockey session logged');
+}
+
+// ---- Rest day ----
+function renderBoardRest(body){
+  body.innerHTML=`<div class="act-rest">
+    <div class="act-rest-i">🛌</div>
+    <div class="act-rest-t">Rest day</div>
+    <div class="act-rest-b">Recovery is where the gains happen. Mobility, hydration, sleep. A gentle walk still counts — not as a session, just as movement.</div>
+    <div class="act-rest-tips">
+      <div class="act-rest-tip">💧 3L water</div>
+      <div class="act-rest-tip">🧘 10min stretch</div>
+      <div class="act-rest-tip">😴 8h+ sleep</div>
+      <div class="act-rest-tip">🚶 Walk outside</div>
+    </div>
+  </div>`;
 }
 
 // Return last N prior sessions for an exercise
@@ -2030,13 +2330,17 @@ function renderWT(){
 
   // ===== GOLF SECTION =====
   html+=`<div class="wo-sep">⛳ Golf</div>`;
+  const courseOpts=S.courses.map(c=>`<option value="${c.id}">${E(c.name)}</option>`).join('');
   html+=`<div class="wo-form">
     <div class="wo-form-row">
-      <div class="wo-fi" style="flex:2"><label>Course</label><input id="round-course" placeholder="Chelsfield Lakes"></div>
+      <div class="wo-fi" style="flex:2"><label>Course</label>
+        <select id="round-course">${courseOpts}<option value="__custom__">— Custom course —</option></select>
+      </div>
       <div class="wo-fi"><label>Holes</label><select id="round-holes"><option value="18">18</option><option value="9">9</option></select></div>
       <div class="wo-fi"><label>Date</label><input type="date" id="round-date" value="${TK}"></div>
       <div class="wo-fi"><label>&nbsp;</label><button class="bl" onclick="newRound()">+ New round</button></div>
     </div>
+    <div style="font-size:10px;color:var(--dim);margin-top:6px">Courses can be managed in Settings &gt; Golf courses.</div>
   </div>`;
   if(!S.rounds.length){
     html+=`<div style="color:var(--dim);font-size:11px;text-align:center;padding:10px">No rounds logged yet</div>`;
@@ -2127,12 +2431,25 @@ function delRun(id){
 
 // ==================== GOLF ====================
 function newRound(){
-  const course=(document.getElementById('round-course').value||'').trim()||'Round';
+  const courseSel=document.getElementById('round-course');
+  const courseId=courseSel.value;
   const holes=parseInt(document.getElementById('round-holes').value)||18;
   const dt=document.getElementById('round-date').value||TK;
-  const round={id:uid(),date:dt,course,holes:Array.from({length:holes},()=>({par:null,score:null})),notes:''};
+  let courseName='Round';
+  let holeArr=Array.from({length:holes},()=>({par:null,score:null}));
+  if(courseId&&courseId!=='__custom__'){
+    const c=S.courses.find(x=>x.id===courseId);
+    if(c){
+      courseName=c.name;
+      holeArr=Array.from({length:holes},(_,i)=>({par:c.holes[i]||null,score:null}));
+    }
+  } else if(courseId==='__custom__'){
+    const name=prompt('Course name:');
+    if(name===null)return;
+    courseName=name.trim()||'Round';
+  }
+  const round={id:uid(),date:dt,course:courseName,holes:holeArr,notes:''};
   S.rounds.push(round);
-  // Count as golf activity for that date
   const a=S.activities[dt]||[];
   if(!a.some(x=>x.type==='golf'&&x.roundId)){
     a.push({type:'golf',time:new Date().toISOString(),roundId:round.id});
@@ -2140,8 +2457,7 @@ function newRound(){
   }
   S.expRound=round.id;
   qS();renderWT();renderAT();renderStreak();
-  toast(`✓ Round started at ${course}`);
-  document.getElementById('round-course').value='';
+  toast(`✓ Round started at ${courseName}`);
 }
 
 function updateHole(roundId,i,field,val){
@@ -2309,11 +2625,95 @@ function renderRecList(){
   </div>`).join('');
 }
 
+// ==================== COURSE LIBRARY ====================
+function renderCourseList(){
+  const el=document.getElementById('course-list');if(!el)return;
+  if(!S.courses||!S.courses.length){el.innerHTML='<div style="font-size:10px;color:var(--dim);padding:4px 0">No saved courses yet</div>';return}
+  el.innerHTML=S.courses.map(c=>{
+    const total=c.holes.reduce((s,p)=>s+(parseInt(p)||0),0);
+    const isOpen=S.expCourse===c.id;
+    return`<div style="border-bottom:1px solid var(--border);padding:6px 0">
+      <div style="display:flex;align-items:center;gap:8px;cursor:pointer" onclick="S.expCourse=${isOpen?'null':`'${c.id}'`};renderCourseList()">
+        <span style="flex:1;font-size:12px;font-weight:700">${E(c.name)}</span>
+        <span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace">${c.holes.length}h · par ${total}</span>
+        <span style="font-size:11px;color:var(--muted)">${isOpen?'▼':'▶'}</span>
+      </div>
+      ${isOpen?`
+        <div style="margin-top:8px;padding:8px;background:var(--card2);border-radius:var(--rx)">
+          <div style="font-size:9px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Per-hole pars (tap to edit)</div>
+          <table class="golf-tbl" style="margin-top:0"><thead><tr><th>Hole</th>${c.holes.map((_,i)=>`<th>${i+1}</th>`).join('')}<th>Total</th></tr></thead>
+          <tbody><tr><td>Par</td>
+          ${c.holes.map((p,i)=>`<td><input type="number" min="3" max="6" value="${p??''}" oninput="updateCoursePar('${c.id}',${i},this.value)"></td>`).join('')}
+          <td style="text-align:center;font-family:'JetBrains Mono',monospace;font-weight:700">${total||'—'}</td></tr></tbody></table>
+          ${c.notes?`<div style="font-size:10px;color:var(--muted);margin-top:6px;font-style:italic">${E(c.notes)}</div>`:''}
+          <div style="display:flex;gap:6px;margin-top:8px">
+            <button class="set-btn" style="padding:3px 10px;font-size:10px" onclick="renameCourse('${c.id}')">Rename</button>
+            <button class="set-btn danger" style="padding:3px 10px;font-size:10px" onclick="delCourse('${c.id}')">Delete</button>
+          </div>
+        </div>
+      `:''}
+    </div>`;
+  }).join('');
+}
+
+function addCourse(){
+  const name=prompt('Course name:');
+  if(!name||!name.trim())return;
+  const holesStr=prompt('Number of holes (9 or 18):','18');
+  const holes=parseInt(holesStr);
+  if(!holes||(holes!==9&&holes!==18)){toast('Must be 9 or 18','err');return}
+  const id='c'+uid();
+  S.courses.push({id,name:name.trim(),holes:Array(holes).fill(4),notes:''});
+  S.expCourse=id;
+  qS();renderCourseList();
+  toast('Course added — set per-hole pars');
+}
+
+function renameCourse(id){
+  const c=S.courses.find(x=>x.id===id);if(!c)return;
+  const n=prompt('New name:',c.name);
+  if(n===null||!n.trim())return;
+  c.name=n.trim();qS();renderCourseList();renderWT();
+}
+
+function delCourse(id){
+  const c=S.courses.find(x=>x.id===id);if(!c)return;
+  if(!confirm(`Delete course "${c.name}"? Existing rounds keep their scorecards.`))return;
+  const idx=S.courses.indexOf(c);
+  S.courses.splice(idx,1);
+  pushUndo({undo:()=>S.courses.splice(idx,0,c)});
+  qS();renderCourseList();renderWT();
+  toast('Course deleted',null,true);
+}
+
+function updateCoursePar(id,i,val){
+  const c=S.courses.find(x=>x.id===id);if(!c)return;
+  c.holes[i]=val===''?null:parseInt(val);
+  qS();
+  // Live-update the total without full re-render (preserves input focus)
+  const el=document.getElementById('course-list');if(!el)return;
+  const total=c.holes.reduce((s,p)=>s+(parseInt(p)||0),0);
+  // Find the total cell in this course's row — simpler approach: update summary line
+  const rows=el.querySelectorAll('div[style*="border-bottom"]');
+  rows.forEach(row=>{
+    const summary=row.querySelector('span[style*="JetBrains"]');
+    if(summary&&summary.textContent.includes(c.holes.length+'h')){
+      summary.textContent=`${c.holes.length}h · par ${total}`;
+    }
+    // Update total cell in the scorecard table
+    const tbl=row.querySelector('.golf-tbl');
+    if(tbl){
+      const tr=tbl.querySelector('tbody tr');
+      if(tr)tr.lastElementChild.textContent=total||'—';
+    }
+  });
+}
+
 function renderAll(){
   renderHdr();renderHR();renderDN();renderHoli();renderWR();
-  renderAT();renderTodos();renderWO();renderNut();renderMood();
+  renderAT();renderTodos();renderBoardActivity();renderNut();renderMood();
   renderCt();renderNT();renderWT();renderWt();renderInj();renderStreak();renderMJ();
-  renderRecList();
+  renderRecList();renderCourseList();
 }
 
 // ================================================================
