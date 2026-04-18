@@ -44,19 +44,22 @@ html:not(.light){
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
 
 /* HEADER */
-#hdr{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:54px;display:flex;align-items:stretch;padding:0 16px}
+#hdr{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:stretch;padding:0 12px;gap:4px}
 html.dark #hdr,html:not(.light) #hdr{background:rgba(23,26,34,.88)}
 @media (prefers-color-scheme: dark){html:not(.light) #hdr{background:rgba(23,26,34,.88)}}
-.hd-logo{display:flex;align-items:center;gap:8px;padding-right:16px;border-right:1px solid var(--border);margin-right:12px}
-.hd-j{width:30px;height:30px;background:linear-gradient(135deg,#f0b429,#e09000);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 2px 8px rgba(200,145,10,.3)}
-.hd-name{font-size:12px;font-weight:800;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
-.hd-date{display:flex;align-items:center;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;flex:1}
-.hd-tabs{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none}
+.hd-logo{display:flex;align-items:center;gap:6px;padding-right:10px;border-right:1px solid var(--border);margin-right:8px;flex-shrink:0}
+.hd-j{width:26px;height:26px;background:linear-gradient(135deg,#f0b429,#e09000);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 2px 6px rgba(200,145,10,.25)}
+.hd-name{font-size:11px;font-weight:800;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+.hd-date{display:none;align-items:center;font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;flex-shrink:0;margin-right:8px}
+@media(min-width:560px){.hd-date{display:flex}}
+.hd-tabs{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;justify-content:flex-end}
 .hd-tabs::-webkit-scrollbar{display:none}
-.hd-tab{display:flex;align-items:center;padding:0 10px;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;cursor:pointer;border:none;background:none;color:var(--muted);font-family:'DM Sans',sans-serif;border-bottom:2.5px solid transparent;transition:all .15s;white-space:nowrap}
+.hd-tab{display:flex;align-items:center;padding:0 9px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;background:none;color:var(--muted);font-family:'DM Sans',sans-serif;border-bottom:2.5px solid transparent;transition:all .15s;white-space:nowrap}
 .hd-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
 .hd-tab:hover:not(.active){color:var(--text)}
-.hd-st{display:flex;align-items:center;font-size:9px;color:var(--dim);margin-left:6px;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.hd-st{display:none;align-items:center;font-size:9px;color:var(--dim);margin-left:4px;font-family:'JetBrains Mono',monospace;white-space:nowrap;flex-shrink:0}
+@media(min-width:720px){.hd-st{display:flex}}
+@media(max-width:420px){.hd-logo{padding-right:8px;margin-right:4px}.hd-name{display:none}.hd-tab{padding:0 7px;font-size:10px}}
 
 /* COMMAND BAR */
 .cmd-bar{max-width:1120px;margin:0 auto;padding:12px 16px 0}
@@ -173,14 +176,20 @@ html.dark #hdr,html:not(.light) #hdr{background:rgba(23,26,34,.88)}
 .ch:hover:not(.active){border-color:var(--border2)}
 
 /* ACTIVITY TRACKER */
-.at-r{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--card2)}
+.at-r{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--card2)}
 .at-r:last-child{border-bottom:none}
-.at-i{font-size:16px;width:22px;text-align:center}
-.at-n{font-size:11px;font-weight:700;letter-spacing:.4px}
-.at-b{flex:1;height:6px;background:var(--card2);border:1px solid var(--border);border-radius:3px;overflow:hidden}
-.at-f{height:100%;border-radius:3px;transition:width .4s}
-.at-nu{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;min-width:30px;text-align:right}
-.at-pm{width:22px;height:22px;border:1px solid var(--border);background:var(--surface);border-radius:var(--rx);color:var(--muted);font-size:13px;cursor:pointer;line-height:1}
+.at-i{font-size:18px;width:22px;text-align:center;flex-shrink:0}
+.at-mid{flex:1;min-width:0}
+.at-nline{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.at-n{font-size:12px;font-weight:700;letter-spacing:.3px}
+.at-nu{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-weight:700}
+.at-days{display:flex;gap:3px;align-items:center}
+.at-dd{width:17px;height:17px;border-radius:4px;border:1px solid var(--border);background:var(--card2);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .1s;flex-shrink:0}
+.at-dd:hover{border-color:var(--border2)}
+.at-dd.done{background:var(--green);color:#fff;border-color:var(--green)}
+.at-dd.today{box-shadow:0 0 0 1.5px var(--gold)}
+.at-actions{display:flex;gap:3px;flex-shrink:0}
+.at-pm{width:26px;height:26px;border:1px solid var(--border);background:var(--surface);border-radius:var(--rx);color:var(--muted);font-size:14px;cursor:pointer;line-height:1;font-family:'DM Sans',sans-serif}
 .at-pm:hover{border-color:var(--accent);color:var(--accent)}
 
 /* WORKOUT WIDGET */
@@ -351,6 +360,28 @@ html.dark #hdr,html:not(.light) #hdr{background:rgba(23,26,34,.88)}
 .wo-rt{font-size:10.5px;color:var(--dim);font-family:'JetBrains Mono',monospace;margin-top:6px;padding:4px 8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rx);display:inline-block}
 .wo-sh{padding:8px 12px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--sh);margin-bottom:5px}
 
+/* NEW workout-tab sections: running & golf */
+.wo-sep{font-size:14px;font-weight:800;margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--border);letter-spacing:.3px}
+.wo-form{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:10px;box-shadow:var(--sh)}
+.wo-form-row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
+.wo-fi{display:flex;flex-direction:column;gap:2px;flex:0 0 auto}
+.wo-fi label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.wo-fi input,.wo-fi select{background:var(--card2);border:1px solid var(--border);border-radius:var(--rx);padding:6px 9px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;width:110px}
+.wo-fi input:focus,.wo-fi select:focus{border-color:var(--accent)}
+.wo-fi input[type="date"]{width:140px}
+
+/* Recent session history table (used in both Board workout card and Workouts tab) */
+.hist-tbl{width:100%;border-collapse:collapse;margin-top:4px}
+.hist-tbl td{padding:2px 0}
+
+/* Golf scorecard */
+.golf-tbl{width:100%;border-collapse:collapse;margin-top:6px;font-size:10.5px}
+.golf-tbl th{background:var(--card2);padding:4px 3px;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.5px;border:1px solid var(--border);text-align:center;min-width:28px}
+.golf-tbl td{padding:3px;border:1px solid var(--border);text-align:center}
+.golf-tbl td:first-child{background:var(--card2);font-weight:700;font-size:9px;color:var(--muted);letter-spacing:.5px;text-align:left;padding-left:8px;white-space:nowrap}
+.golf-tbl input{width:100%;background:none;border:none;padding:2px 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:inherit;outline:none;font-weight:600}
+.golf-tbl input:focus{background:var(--accent-bg)}
+
 /* HEALTH TAB (NEW) */
 .hk-tab{max-width:800px;margin:0 auto}
 .hk-sec{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:14px;box-shadow:var(--sh)}
@@ -475,7 +506,6 @@ window.onerror=function(m,s,l,c,e){
   <div id="tab-life">
     <div id="holi-wrap"></div>
     <div id="wr-wrap"></div>
-    <div class="health-row" id="hr"></div>
     <div class="date-nav" id="dn"></div>
     <div class="board-grid">
       <div>
@@ -514,13 +544,6 @@ window.onerror=function(m,s,l,c,e){
             <div class="nh">Search your food library or type anything</div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-h">
-            <span class="card-l" style="color:var(--purple)">How are you feeling?</span>
-            <span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="mdt"></span>
-          </div>
-          <div id="mood-body"></div>
-        </div>
       </div>
     </div>
   </div>
@@ -528,6 +551,16 @@ window.onerror=function(m,s,l,c,e){
   <!-- HEALTH TAB (NEW) -->
   <div id="tab-health" style="display:none">
     <div class="hk-tab">
+      <div class="health-row" id="hr"></div>
+      <div class="hk-sec">
+        <div class="hk-h">
+          <div>
+            <div class="hk-ti">🧠 How are you feeling?</div>
+            <div class="hk-ti-sub" id="mdt">Today</div>
+          </div>
+        </div>
+        <div id="mood-body"></div>
+      </div>
       <div class="hk-sec">
         <div class="hk-h">
           <div>
@@ -564,8 +597,8 @@ window.onerror=function(m,s,l,c,e){
       <div class="hk-sec">
         <div class="hk-h">
           <div>
-            <div class="hk-ti">🧠 Mood &amp; Symptoms</div>
-            <div class="hk-ti-sub">Recent entries — logged from the Board tab</div>
+            <div class="hk-ti">📓 Mood History</div>
+            <div class="hk-ti-sub">Recent entries</div>
           </div>
         </div>
         <div id="mj-list"></div>
@@ -709,7 +742,7 @@ legs:{name:"Legs & Core",phase:"Wks 8+",time:"55-65m",color:"#1a9a6c",ex:[{n:"Ba
 rest:{name:"Rest Day",phase:"",time:"Recovery",color:"#0d8a8a",ex:[]},golf:{name:"Golf",phase:"",time:"3-5h",color:"#1a9a6c",ex:[{n:"Walking 18 holes",s:"Full round",w:"Bag",r:"-",m:"Legs, cardio",f:["6km+. 1200-1500cal. Counts as session."],x:["Bring water."],p:"Net positive."}]},park:{name:"Park Run",phase:"",time:"25-45m",color:"#1a9a6c",ex:[{n:"Park laps (1km loop)",s:"Phase",w:"BW",r:"-",m:"Cardio",f:["Wks 1-3: 3 laps walk/jog.","Wks 4-7: 4 laps jog.","Wks 8+: 5 laps sub-35min."],x:["Don't go too hard early."],p:"Follow phase."}]},
 };
 
-const PM={foundation:['fullA','fullB','rest','park','golf'],rampingUp:['upper','lower','rest','park','golf'],fullVolume:['push','pull','legs','rest','park','golf'],peak:['push','pull','legs','rest','park','golf']};
+const PM={foundation:['fullA','fullB'],rampingUp:['upper','lower'],fullVolume:['push','pull','legs'],peak:['push','pull','legs']};
 const PT={foundation:{gym:{min:3,t:3},park:{min:1,t:2},golf:{min:1,t:2},hockey:{min:0,t:0}},rampingUp:{gym:{min:4,t:4},park:{min:2,t:3},golf:{min:2,t:3},hockey:{min:0,t:0}},fullVolume:{gym:{min:4,t:5},park:{min:3,t:4},golf:{min:2,t:3},hockey:{min:0,t:0}},peak:{gym:{min:5,t:5},park:{min:3,t:4},golf:{min:2,t:3},hockey:{min:1,t:2}}};
 const PS=/*suggested split by weekday*/ {foundation:["Full Body A","Full Body B","Rest","Full Body A","Full Body B","Park/Golf","Rest/Golf"],rampingUp:["Upper","Lower","Park","Upper","Lower/Golf","Park/Golf","Rest"],fullVolume:["Push","Pull","Legs","Park","Push/Golf","Pull/Park","Rest"],peak:["Push","Pull","Legs","Park","Push/Golf","Pull/Park","Rest"]};
 const CATS=[{k:'health',l:'Health',c:'var(--green)',i:'💪'},{k:'house',l:'House',c:'var(--teal)',i:'🏠'},{k:'work',l:'Work',c:'var(--accent)',i:'💼'},{k:'life',l:'Life & Fun',c:'var(--purple)',i:'🎯'}];
@@ -723,7 +756,7 @@ const PS0=new Date('2026-04-13'),SW=129,TW=99;
 let NOW=new Date(),TK='';  // both recomputed in refreshNow()
 
 // Primary state object. `weights`, `injections`, `mood`, `workoutLogs`, `userCal`, `archiveCompleted`,
-// `theme`, `holiMode`, `sync`, `wrDismissed` are NEW.
+// `theme`, `holiMode`, `sync`, `wrDismissed`, `runs`, `rounds` are NEW.
 let S={
   todos:[],nutrition:{},content:[],activities:{},foods:[...DF],
   todayWO:null,recDefs:[],lastRecDaily:null,lastRecWeekly:null,
@@ -731,6 +764,8 @@ let S={
   injections:[],                  // [{id, date, dose, site, notes, symptoms}]
   mood:{},                        // {date: {energy, hunger, nausea, notes}}
   workoutLogs:{},                 // {date: [{ex, sets: [{reps, weight}]}]}
+  runs:[],                        // [{id, date, km, timeSec, splits: [sec,...], notes}]
+  rounds:[],                      // [{id, date, course, holes:[{par,score}], notes, expanded}]
   userCal:{},                     // {date: "Event name"} — overrides/adds to DEFAULT_CAL
   archiveCompleted:true,          // hide completed todos older than 3 days
   theme:'auto',                   // 'auto' | 'light' | 'dark'
@@ -831,7 +866,7 @@ function save(){
   const d={todos:S.todos,nutrition:S.nutrition,content:S.content,activities:S.activities,foods:S.foods,
     todayWO:S.todayWO,recDefs:S.recDefs,lastRecDaily:S.lastRecDaily,lastRecWeekly:S.lastRecWeekly,
     curWeight:S.curWeight,weights:S.weights,injections:S.injections,mood:S.mood,
-    workoutLogs:S.workoutLogs,userCal:S.userCal,archiveCompleted:S.archiveCompleted,
+    workoutLogs:S.workoutLogs,runs:S.runs,rounds:S.rounds,userCal:S.userCal,archiveCompleted:S.archiveCompleted,
     theme:S.theme,holiMode:S.holiMode,sync:S.sync,wrDismissed:S.wrDismissed};
   try{localStorage.setItem(SK,JSON.stringify(d));stMsg('✓ Saved')}catch(e){stMsg('⚠ Storage full')}
 }
@@ -1457,7 +1492,7 @@ function dismissWR(){S.wrDismissed=isoWeek(NOW);qS();renderWR()}
 
 function renderHdr(){
   const el=document.getElementById('hd-date');
-  if(el)el.textContent=NOW.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}).toUpperCase()+' · '+dose()+' · DAY '+dLeft()+' LEFT';
+  if(el)el.textContent=NOW.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}).toUpperCase()+' · '+dLeft()+'D TO JOB';
 }
 
 function renderHR(){
@@ -1540,8 +1575,6 @@ function renderWR(){
 
 function renderAT(){
   const el=document.getElementById('ac');if(!el)return;
-  const kActs={gym:0,park:0,golf:0,hockey:0};
-  (S.activities[S.selDate]||[]).forEach(a=>{if(kActs[a.type]!==undefined)kActs[a.type]++});
   const p=ph();const phaseT=PT[p.pk]||{};
   const items=[
     {k:'gym',l:'Gym',c:'var(--accent)',i:'🏋️'},
@@ -1549,26 +1582,56 @@ function renderAT(){
     {k:'golf',l:'Golf',c:'var(--teal)',i:'⛳'},
     {k:'hockey',l:'Hockey',c:'var(--purple)',i:'🏑'}
   ];
-  const wk=wActs();
-  let html=`<div class="card-h"><span class="card-l" style="color:var(--gold)">Activities (${S.selDate===TK?'today':new Date(S.selDate+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'})})</span><span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace">${p.l.split('·')[0].trim()}</span></div><div style="padding:4px 12px">`;
+  const wkDays=gWk(S.weekOff);
+  // Day-of-week labels (Mon-first) matching gWk() output
+  const dayLabels=['M','T','W','T','F','S','S'];
+  // Which days in the current week had each activity?
+  const perActivityDays={};
   items.forEach(it=>{
-    const today=kActs[it.k]||0;
+    perActivityDays[it.k]=wkDays.map(d=>(S.activities[fmt(d)]||[]).some(a=>a.type===it.k));
+  });
+  // Sum weekly counts
+  const wk={gym:0,park:0,golf:0,hockey:0};
+  wkDays.forEach(d=>{(S.activities[fmt(d)]||[]).forEach(a=>{if(wk[a.type]!==undefined)wk[a.type]++})});
+  const todayIdx=wkDays.findIndex(d=>fmt(d)===TK);
+  const weekLbl=S.weekOff===0?'This week':S.weekOff===1?'Next week':S.weekOff===-1?'Last week':`${S.weekOff>0?'+':''}${S.weekOff}w`;
+  let html=`<div class="card-h"><span class="card-l" style="color:var(--gold)">Activities · ${E(weekLbl)}</span><span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace">${E(p.l.split('·')[0].trim())}</span></div><div style="padding:6px 12px 8px">`;
+  items.forEach(it=>{
     const weekT=wk[it.k]||0;
     const tgt=phaseT[it.k]||{min:0,t:0};
-    const pct=tgt.t?Math.min(100,(weekT/tgt.t)*100):0;
+    const dayFlags=perActivityDays[it.k];
     html+=`<div class="at-r">
       <div class="at-i">${it.i}</div>
-      <div style="flex:1">
-        <div class="at-n" style="color:${it.c}">${it.l}</div>
-        <div class="at-b"><div class="at-f" style="width:${pct}%;background:${it.c}"></div></div>
+      <div class="at-mid">
+        <div class="at-nline"><span class="at-n" style="color:${it.c}">${it.l}</span><span class="at-nu">${weekT}/${tgt.t||'—'}</span></div>
+        <div class="at-days">`;
+    wkDays.forEach((d,i)=>{
+      const did=dayFlags[i];
+      const isToday=i===todayIdx;
+      const k=fmt(d);
+      html+=`<span class="at-dd ${did?'done':''} ${isToday?'today':''}" onclick="toggleActDay('${it.k}','${k}')" title="${dayLabels[i]} ${d.getDate()}${did?' · done':''}"><span style="font-size:8px">${dayLabels[i]}</span></span>`;
+    });
+    html+=`</div>
       </div>
-      <div class="at-nu">${weekT}/${tgt.t}</div>
-      <button class="at-pm" onclick="logAct('${it.k}')">+</button>
-      <button class="at-pm" onclick="rmAct('${it.k}')">−</button>
+      <div class="at-actions">
+        <button class="at-pm" onclick="logAct('${it.k}')" title="Log for ${S.selDate===TK?'today':S.selDate}">+</button>
+        <button class="at-pm" onclick="rmAct('${it.k}')" title="Undo last">−</button>
+      </div>
     </div>`;
   });
   html+=`</div>`;
   el.innerHTML=html;
+}
+
+// Toggle activity on a specific day in the current week (click the day dots)
+function toggleActDay(type,dateKey){
+  const a=S.activities[dateKey]||[];
+  const idx=a.findIndex(x=>x.type===type);
+  if(idx>=0)a.splice(idx,1);
+  else a.push({type,time:new Date().toISOString()});
+  if(a.length)S.activities[dateKey]=a;
+  else delete S.activities[dateKey];
+  qS();renderAT();renderStreak();
 }
 
 function renderTodos(){
@@ -1618,13 +1681,14 @@ function renderTodos(){
 }
 
 function renderWO(){
-  const p=ph();const key=S.todayWO||p.keys[Math.min(NOW.getDay(),p.keys.length-1)];
+  const p=ph();const key=S.todayWO&&p.keys.includes(S.todayWO)?S.todayWO:p.keys[0];
+  if(S.todayWO!==key)S.todayWO=key;
   const wp=document.getElementById('wp');if(wp)wp.textContent=p.l;
-  const ws=document.getElementById('ws');if(ws)ws.innerHTML=`<b>Suggested:</b> ${E(PS[p.pk][NOW.getDay()]||'')}`;
+  const suggestion=PS[p.pk][NOW.getDay()]||'';
+  const ws=document.getElementById('ws');if(ws)ws.innerHTML=`<b>Suggested today:</b> ${E(suggestion)}`;
   const wb=document.getElementById('wb');
   if(wb){
-    const avail=p.keys;
-    wb.innerHTML=avail.map(k=>{const w=WO[k];return`<button class="wk-b ${key===k?'sel':''}" onclick="S.todayWO='${k}';renderWO()">${E(w.name)}</button>`}).join('');
+    wb.innerHTML=p.keys.map(k=>{const w=WO[k];return`<button class="wk-b ${key===k?'sel':''}" onclick="S.todayWO='${k}';renderWO()">${E(w.name)}</button>`}).join('');
   }
   const wbody=document.getElementById('wbody');if(!wbody)return;
   const w=WO[key];if(!w){wbody.innerHTML='';return}
@@ -1633,7 +1697,8 @@ function renderWO(){
   w.ex.forEach((ex,i)=>{
     const isOpen=S.expEx===key+'_'+i;
     const currentLog=currentSetLog(ex.n);
-    const lastLog=lastSetLog(ex.n);
+    const recent=recentSetLogs(ex.n,3);
+    const escN=E(ex.n).replace(/'/g,'');
     html+=`<div class="er">
       <div class="eh" onclick="S.expEx=${isOpen?'null':`'${key}_${i}'`};renderWO()">
         <div class="en">${i+1}. ${E(ex.n)}</div>
@@ -1647,26 +1712,35 @@ function renderWO(){
       if(ex.x&&ex.x.length){html+=`<div class="esl">Common mistakes</div>`;ex.x.forEach(x=>html+=`<div class="emk">${E(x)}</div>`)}
       html+=`<div class="epg">📈 ${E(ex.p)}</div>
         <div class="ert">⏱ Rest: ${E(ex.r)} · Target: ${E(ex.s)} @ ${E(ex.w)}</div>
-        <a class="ev" href="${vidLink(ex.n)}" target="_blank">▶ Video tutorial</a>
-        <div class="set-block">
-          <div class="set-label">📝 Log sets · today</div>`;
-      if(lastLog&&lastLog.sets.length){
-        const summary=lastLog.sets.map(s=>s.reps+(s.weight?`×${s.weight}kg`:'')).join(', ');
-        html+=`<div class="set-last">Last (${lastLog.date}): ${E(summary)}</div>`;
+        <a class="ev" href="${vidLink(ex.n)}" target="_blank">▶ Video tutorial</a>`;
+      // Recent sessions table
+      if(recent.length){
+        html+=`<div class="set-block" style="background:var(--card2);border:1px solid var(--border);border-left:3px solid var(--accent)">
+          <div class="set-label" style="color:var(--accent)">📅 Recent sessions</div>
+          <table class="hist-tbl"><tbody>`;
+        recent.forEach(r=>{
+          const summary=r.sets.filter(s=>s.reps||s.weight).map(s=>`${s.reps||'?'}×${s.weight||'?'}kg`).join(', ');
+          const dayName=new Date(r.date+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+          html+=`<tr><td style="color:var(--muted);font-size:10px;padding-right:8px">${E(dayName)}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10.5px">${E(summary||'—')}</td></tr>`;
+        });
+        html+=`</tbody></table></div>`;
       }
+      // Set logger for today
+      html+=`<div class="set-block">
+          <div class="set-label">📝 Log sets · today</div>`;
       html+=`<div class="set-rows">`;
       const sets=currentLog?currentLog.sets:[];
       sets.forEach((s,si)=>{
         html+=`<div class="set-row">
           <span>Set ${si+1}:</span>
-          <input type="number" placeholder="reps" value="${s.reps||''}" oninput="updateSet('${E(ex.n).replace(/'/g,'')}',${si},'reps',this.value)">
+          <input type="number" placeholder="reps" value="${s.reps||''}" oninput="updateSet('${escN}',${si},'reps',this.value)">
           <span>×</span>
-          <input type="number" step="0.5" placeholder="kg" value="${s.weight||''}" oninput="updateSet('${E(ex.n).replace(/'/g,'')}',${si},'weight',this.value)">
+          <input type="number" step="0.5" placeholder="kg" value="${s.weight||''}" oninput="updateSet('${escN}',${si},'weight',this.value)">
         </div>`;
       });
       html+=`</div>
-          <button class="set-add" onclick="addSetRow('${E(ex.n).replace(/'/g,'')}')">+ Add set</button>
-          ${sets.length?`<button class="set-save" onclick="clearSets('${E(ex.n).replace(/'/g,'')}')">Clear</button>`:''}
+          <button class="set-add" onclick="addSetRow('${escN}')">+ Add set</button>
+          ${sets.length?`<button class="set-save" onclick="clearSets('${escN}')">Clear</button>`:''}
         </div>
       </div>`;
     }
@@ -1674,6 +1748,18 @@ function renderWO(){
   });
   html+=`</div>`;
   wbody.innerHTML=html;
+}
+
+// Return last N prior sessions for an exercise
+function recentSetLogs(exName,limit){
+  const n=limit||3;
+  const dates=Object.keys(S.workoutLogs).filter(d=>d<=TK).sort().reverse();
+  const out=[];
+  for(const d of dates){
+    const entry=(S.workoutLogs[d]||[]).find(l=>l.ex===exName);
+    if(entry&&entry.sets&&entry.sets.length){out.push({date:d,sets:entry.sets});if(out.length>=n)break}
+  }
+  return out;
 }
 
 function renderNut(){
@@ -1826,7 +1912,8 @@ function delFd(id){
 
 function renderWT(){
   const wot=document.getElementById('wot');if(!wot)return;
-  const p=ph();const curKey=S.woTab||p.keys[0];
+  const p=ph();const curKey=S.woTab&&WO[S.woTab]&&p.keys.includes(S.woTab)?S.woTab:p.keys[0];
+  if(S.woTab!==curKey)S.woTab=curKey;
   let html=`<div class="wo-ps"><div class="wo-pg"><span class="wo-pl">Phase</span>`;
   ['foundation','rampingUp','fullVolume','peak'].forEach(pk=>{
     const l={foundation:'Foundation (1-3)',rampingUp:'Ramping (4-7)',fullVolume:'Full Vol (8-12)',peak:'Peak (13+)'}[pk];
@@ -1844,14 +1931,19 @@ function renderWT(){
   html+=`<div class="wo-sh" onclick="S.woTabEx=S.woTabEx==='wu'?null:'wu';renderWT()"><div style="font-weight:700">🔥 Warm-up (5-7 min)</div><div style="color:var(--muted);font-size:11px">${S.woTabEx==='wu'?'▼':'▶'}</div></div>`;
   if(S.woTabEx==='wu'){html+=`<div class="wo-ec"><div class="wo-eb">`;WU.forEach(x=>html+=`<div class="wo-st"><b>${E(x.e)}</b> — ${E(x.n)}</div>`);html+=`</div></div>`}
 
-  // Exercises
+  // Exercises (with recent session history + set logger)
   if(w.ex.length){
     w.ex.forEach((ex,i)=>{
       const isOpen=S.woTabEx===String(i);
+      const currentLog=currentSetLog(ex.n);
+      const recent=recentSetLogs(ex.n,5);
+      const escN=E(ex.n).replace(/'/g,'');
+      // Summary badge for collapsed state — shows last session
+      const lastSummary=recent.length?recent[0].sets.filter(s=>s.reps||s.weight).map(s=>`${s.reps||'?'}×${s.weight||'?'}kg`).join(', '):'';
       html+=`<div class="wo-ec">
         <div class="wo-eh" onclick="S.woTabEx='${isOpen?'':String(i)}';renderWT()">
           <div class="wo-en" style="background:${w.color||'var(--accent)'}">${i+1}</div>
-          <div style="flex:1"><div class="wo-enm">${E(ex.n)}</div><div class="wo-eq">${E(ex.s)} · ${E(ex.w)} · rest ${E(ex.r)}</div></div>
+          <div style="flex:1"><div class="wo-enm">${E(ex.n)}</div><div class="wo-eq">${E(ex.s)} · ${E(ex.w)} · rest ${E(ex.r)}${lastSummary?` <span style="color:var(--accent)">· last: ${E(lastSummary)}</span>`:''}</div></div>
           <div style="color:var(--muted);font-size:11px">${isOpen?'▼':'▶'}</div>
         </div>`;
       if(isOpen){
@@ -1862,7 +1954,36 @@ function renderWT(){
         if(ex.x&&ex.x.length){html+=`<div class="wo-sc">Common mistakes</div>`;ex.x.forEach(x=>html+=`<div class="wo-mk">${E(x)}</div>`)}
         html+=`<div class="wo-sc">Progression</div><div class="wo-st" style="border-left-color:var(--green);color:var(--green)">${E(ex.p)}</div>
           <div class="wo-rt">⏱ Rest ${E(ex.r)} · Target ${E(ex.s)} @ ${E(ex.w)}</div>
-          <a class="ev" href="${vidLink(ex.n)}" target="_blank" style="margin-top:8px">▶ Video tutorial</a>
+          <a class="ev" href="${vidLink(ex.n)}" target="_blank" style="margin-top:8px">▶ Video tutorial</a>`;
+        // Recent session history
+        if(recent.length){
+          html+=`<div class="wo-sc" style="margin-top:12px">📅 Recent sessions</div><table class="hist-tbl"><tbody>`;
+          recent.forEach(r=>{
+            const summary=r.sets.filter(s=>s.reps||s.weight).map(s=>`${s.reps||'?'}×${s.weight||'?'}kg`).join(', ');
+            const dayName=new Date(r.date+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+            html+=`<tr><td style="color:var(--muted);font-size:10.5px;padding:3px 10px 3px 0">${E(dayName)}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text)">${E(summary||'—')}</td></tr>`;
+          });
+          html+=`</tbody></table>`;
+        } else {
+          html+=`<div class="wo-sc" style="margin-top:12px">📅 Recent sessions</div><div style="color:var(--dim);font-size:11px;padding:3px 0">No prior sessions — first time!</div>`;
+        }
+        // Set logger (gym only — this section already guards via w.ex existing)
+        html+=`<div class="wo-sc" style="margin-top:12px">📝 Log sets · today</div>
+          <div class="set-rows" style="margin-top:4px">`;
+        const sets=currentLog?currentLog.sets:[];
+        sets.forEach((s,si)=>{
+          html+=`<div class="set-row">
+            <span>Set ${si+1}:</span>
+            <input type="number" placeholder="reps" value="${s.reps||''}" oninput="updateSet('${escN}',${si},'reps',this.value)">
+            <span>×</span>
+            <input type="number" step="0.5" placeholder="kg" value="${s.weight||''}" oninput="updateSet('${escN}',${si},'weight',this.value)">
+          </div>`;
+        });
+        html+=`</div>
+          <div style="display:flex;gap:6px;margin-top:6px">
+            <button class="set-add" onclick="addSetRow('${escN}')">+ Add set</button>
+            ${sets.length?`<button class="set-save" onclick="clearSets('${escN}')">Clear</button>`:''}
+          </div>
         </div>`;
       }
       html+=`</div>`;
@@ -1875,7 +1996,199 @@ function renderWT(){
   html+=`<div class="wo-sh" onclick="S.woTabEx=S.woTabEx==='cd'?null:'cd';renderWT()"><div style="font-weight:700">❄️ Cool-down (3-5 min)</div><div style="color:var(--muted);font-size:11px">${S.woTabEx==='cd'?'▼':'▶'}</div></div>`;
   if(S.woTabEx==='cd'){html+=`<div class="wo-ec"><div class="wo-eb">`;CD.forEach(x=>html+=`<div class="wo-st"><b>${E(x.e)}</b> — ${E(x.n)}</div>`);html+=`</div></div>`}
 
+  // ===== RUNNING SECTION =====
+  html+=`<div class="wo-sep">🏃 Running</div>`;
+  html+=`<div class="wo-form">
+    <div class="wo-form-row">
+      <div class="wo-fi"><label>Date</label><input type="date" id="run-date" value="${TK}"></div>
+      <div class="wo-fi"><label>Distance (km)</label><input type="number" step="0.1" id="run-km" placeholder="5.0"></div>
+      <div class="wo-fi"><label>Time (mm:ss)</label><input type="text" id="run-time" placeholder="28:30"></div>
+      <div class="wo-fi" style="flex:1"><label>Notes</label><input id="run-notes" placeholder="Optional"></div>
+      <div class="wo-fi"><label>&nbsp;</label><button class="bl" onclick="logRun()">+ Log</button></div>
+    </div>
+  </div>`;
+  if(!S.runs.length){
+    html+=`<div style="color:var(--dim);font-size:11px;text-align:center;padding:10px">No runs logged yet</div>`;
+  } else {
+    S.runs.slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,15).forEach(r=>{
+      const paceSec=r.km?Math.round(r.timeSec/r.km):0;
+      const paceStr=paceSec?Math.floor(paceSec/60)+':'+String(paceSec%60).padStart(2,'0'):'—';
+      const timeStr=Math.floor(r.timeSec/60)+':'+String(r.timeSec%60).padStart(2,'0');
+      const dayName=new Date(r.date+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+      html+=`<div class="wo-ec">
+        <div class="wo-eh" style="padding:10px 14px">
+          <div class="wo-en" style="background:var(--green)">🏃</div>
+          <div style="flex:1">
+            <div class="wo-enm">${E(dayName)} · ${r.km}km</div>
+            <div class="wo-eq">${E(timeStr)} · pace ${E(paceStr)}/km${r.notes?' · '+E(r.notes):''}</div>
+          </div>
+          <span class="inj-x" onclick="delRun('${r.id}')">×</span>
+        </div>
+      </div>`;
+    });
+  }
+
+  // ===== GOLF SECTION =====
+  html+=`<div class="wo-sep">⛳ Golf</div>`;
+  html+=`<div class="wo-form">
+    <div class="wo-form-row">
+      <div class="wo-fi" style="flex:2"><label>Course</label><input id="round-course" placeholder="Chelsfield Lakes"></div>
+      <div class="wo-fi"><label>Holes</label><select id="round-holes"><option value="18">18</option><option value="9">9</option></select></div>
+      <div class="wo-fi"><label>Date</label><input type="date" id="round-date" value="${TK}"></div>
+      <div class="wo-fi"><label>&nbsp;</label><button class="bl" onclick="newRound()">+ New round</button></div>
+    </div>
+  </div>`;
+  if(!S.rounds.length){
+    html+=`<div style="color:var(--dim);font-size:11px;text-align:center;padding:10px">No rounds logged yet</div>`;
+  } else {
+    S.rounds.slice().sort((a,b)=>b.date.localeCompare(a.date)).forEach(r=>{
+      const filled=r.holes.filter(h=>h.score!=null&&h.score!=='');
+      const parFilled=r.holes.filter(h=>h.par!=null&&h.par!==''&&h.score!=null&&h.score!=='');
+      const totScore=filled.reduce((s,h)=>s+(parseInt(h.score)||0),0);
+      const totPar=parFilled.reduce((s,h)=>s+(parseInt(h.par)||0),0);
+      const diff=parFilled.length?totScore-totPar:null;
+      const diffStr=diff==null?'':(diff===0?'E':(diff>0?'+'+diff:String(diff)));
+      const dayName=new Date(r.date+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+      const isOpen=S.expRound===r.id;
+      html+=`<div class="wo-ec">
+        <div class="wo-eh" onclick="S.expRound=${isOpen?'null':`'${r.id}'`};renderWT()">
+          <div class="wo-en" style="background:var(--teal)">⛳</div>
+          <div style="flex:1">
+            <div class="wo-enm">${E(dayName)} · ${E(r.course||'Course')}</div>
+            <div class="wo-eq">${filled.length}/${r.holes.length} holes · ${totScore||'—'} shots${diffStr?' <span style="color:'+(diff<0?'var(--green)':(diff>0?'var(--red)':'var(--muted)'))+';font-weight:700">('+E(diffStr)+')</span>':''}</div>
+          </div>
+          <span class="inj-x" onclick="event.stopPropagation();delRound('${r.id}')">×</span>
+          <div style="color:var(--muted);font-size:11px;margin-left:6px">${isOpen?'▼':'▶'}</div>
+        </div>`;
+      if(isOpen){
+        html+=`<div class="wo-eb"><table class="golf-tbl"><thead><tr><th>Hole</th>`;
+        r.holes.forEach((_,i)=>html+=`<th>${i+1}</th>`);
+        html+=`<th>Total</th></tr></thead><tbody>
+          <tr><td>Par</td>`;
+        r.holes.forEach((h,i)=>html+=`<td><input type="number" min="3" max="6" value="${h.par??''}" oninput="updateHole('${r.id}',${i},'par',this.value)"></td>`);
+        html+=`<td style="text-align:center;font-family:'JetBrains Mono',monospace">${totPar||'—'}</td></tr>
+          <tr><td>Score</td>`;
+        r.holes.forEach((h,i)=>{
+          const overPar=h.par!=null&&h.par!==''&&h.score!=null&&h.score!==''?(parseInt(h.score)-parseInt(h.par)):null;
+          const color=overPar==null?'var(--text)':(overPar<0?'var(--green)':(overPar>0?'var(--red)':'var(--text)'));
+          html+=`<td><input type="number" min="1" max="15" style="color:${color}" value="${h.score??''}" oninput="updateHole('${r.id}',${i},'score',this.value)"></td>`;
+        });
+        html+=`<td style="text-align:center;font-family:'JetBrains Mono',monospace;font-weight:700">${totScore||'—'}${diffStr?' ('+E(diffStr)+')':''}</td></tr>
+        </tbody></table>
+        <div style="margin-top:8px"><label style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px">NOTES</label><input class="ni" style="width:100%;margin-top:3px" value="${E(r.notes||'')}" oninput="updateRoundNotes('${r.id}',this.value)" placeholder="Weather, playing partner, highlights..."></div>
+        </div>`;
+      }
+      html+=`</div>`;
+    });
+  }
+
   wot.innerHTML=html;
+}
+
+// ==================== RUNNING ====================
+function logRun(){
+  const dt=document.getElementById('run-date').value||TK;
+  const km=parseFloat(document.getElementById('run-km').value);
+  const timeStr=document.getElementById('run-time').value.trim();
+  const notes=document.getElementById('run-notes').value.trim();
+  if(isNaN(km)||km<=0){toast('Enter distance in km','err');return}
+  // Parse mm:ss or just minutes
+  let timeSec=0;
+  if(timeStr.includes(':')){const[m,s]=timeStr.split(':');timeSec=(parseInt(m)||0)*60+(parseInt(s)||0)}
+  else{timeSec=Math.round((parseFloat(timeStr)||0)*60)}
+  if(timeSec<=0){toast('Enter time as mm:ss','err');return}
+  S.runs.push({id:uid(),date:dt,km,timeSec,notes});
+  // Also count as a park activity for that date
+  const a=S.activities[dt]||[];
+  if(!a.some(x=>x.type==='park'&&x.runId)){
+    a.push({type:'park',time:new Date().toISOString(),runId:S.runs[S.runs.length-1].id});
+    S.activities[dt]=a;
+  }
+  qS();renderWT();renderAT();renderStreak();
+  toast(`✓ Run logged: ${km}km`);
+  document.getElementById('run-km').value='';
+  document.getElementById('run-time').value='';
+  document.getElementById('run-notes').value='';
+}
+
+function delRun(id){
+  if(!confirm('Remove this run?'))return;
+  const r=S.runs.find(x=>x.id===id);if(!r)return;
+  const idx=S.runs.indexOf(r);
+  S.runs.splice(idx,1);
+  // Remove linked activity entry if present
+  const a=S.activities[r.date]||[];
+  const actIdx=a.findIndex(x=>x.runId===id);
+  if(actIdx>=0){a.splice(actIdx,1);if(a.length)S.activities[r.date]=a;else delete S.activities[r.date]}
+  pushUndo({undo:()=>{S.runs.splice(idx,0,r);if(actIdx>=0){const aa=S.activities[r.date]||[];aa.push({type:'park',runId:id});S.activities[r.date]=aa}}});
+  qS();renderWT();renderAT();renderStreak();
+  toast('Run removed',null,true);
+}
+
+// ==================== GOLF ====================
+function newRound(){
+  const course=(document.getElementById('round-course').value||'').trim()||'Round';
+  const holes=parseInt(document.getElementById('round-holes').value)||18;
+  const dt=document.getElementById('round-date').value||TK;
+  const round={id:uid(),date:dt,course,holes:Array.from({length:holes},()=>({par:null,score:null})),notes:''};
+  S.rounds.push(round);
+  // Count as golf activity for that date
+  const a=S.activities[dt]||[];
+  if(!a.some(x=>x.type==='golf'&&x.roundId)){
+    a.push({type:'golf',time:new Date().toISOString(),roundId:round.id});
+    S.activities[dt]=a;
+  }
+  S.expRound=round.id;
+  qS();renderWT();renderAT();renderStreak();
+  toast(`✓ Round started at ${course}`);
+  document.getElementById('round-course').value='';
+}
+
+function updateHole(roundId,i,field,val){
+  const r=S.rounds.find(x=>x.id===roundId);if(!r||!r.holes[i])return;
+  r.holes[i][field]=val===''?null:val;
+  qS();
+  // Re-render only the header row / totals — full re-render is too expensive while typing.
+  // But for simplicity, do a light re-render of totals if they changed — easier: skip renderWT here, user sees live total on blur
+  // Actually better: do a cheap update of the totals cell via direct DOM poke on blur would be nicer, but keep it simple:
+  // We DON'T re-render, so inputs don't lose focus. Totals update on next full render (e.g. add/delete/expand).
+  // Instead, update totals cells live:
+  updateGolfTotals(roundId);
+}
+
+// Live-update the total shot/par cells for a round without re-rendering the whole tab
+function updateGolfTotals(roundId){
+  const r=S.rounds.find(x=>x.id===roundId);if(!r)return;
+  const totScore=r.holes.reduce((s,h)=>s+(parseInt(h.score)||0),0);
+  const parFilled=r.holes.filter(h=>h.par!=null&&h.par!==''&&h.score!=null&&h.score!=='');
+  const totPar=parFilled.reduce((s,h)=>s+(parseInt(h.par)||0),0);
+  const diff=parFilled.length?totScore-totPar:null;
+  const diffStr=diff==null?'':(diff===0?' (E)':(diff>0?' (+'+diff+')':' ('+diff+')'));
+  // Find cells by iterating tables and matching round
+  document.querySelectorAll('.golf-tbl').forEach(tbl=>{
+    const inputs=tbl.querySelectorAll('input[oninput*="'+roundId+'"]');
+    if(!inputs.length)return;
+    const rows=tbl.querySelectorAll('tbody tr');
+    if(rows.length>=2){
+      const parTotal=rows[0].lastElementChild;if(parTotal)parTotal.textContent=totPar||'—';
+      const scoreTotal=rows[1].lastElementChild;if(scoreTotal)scoreTotal.textContent=(totScore||'—')+diffStr;
+    }
+  });
+}
+
+function updateRoundNotes(id,val){const r=S.rounds.find(x=>x.id===id);if(r){r.notes=val;qS()}}
+
+function delRound(id){
+  if(!confirm('Remove this round?'))return;
+  const r=S.rounds.find(x=>x.id===id);if(!r)return;
+  const idx=S.rounds.indexOf(r);
+  S.rounds.splice(idx,1);
+  const a=S.activities[r.date]||[];
+  const actIdx=a.findIndex(x=>x.roundId===id);
+  if(actIdx>=0){a.splice(actIdx,1);if(a.length)S.activities[r.date]=a;else delete S.activities[r.date]}
+  pushUndo({undo:()=>{S.rounds.splice(idx,0,r);if(actIdx>=0){const aa=S.activities[r.date]||[];aa.push({type:'golf',roundId:id});S.activities[r.date]=aa}}});
+  qS();renderWT();renderAT();renderStreak();
+  toast('Round removed',null,true);
 }
 
 function renderWt(){
