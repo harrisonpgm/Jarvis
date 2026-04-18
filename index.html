@@ -6,11 +6,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Jarvis">
-<meta name="theme-color" content="#f5f6fa" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0e1016" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0a0d15">
 <title>Jarvis — Life Board</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23f0b429'/><text x='16' y='23' text-anchor='middle' font-size='20' font-weight='900' fill='white'>J</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='36' fill='%23f0b429'/><text x='90' y='130' text-anchor='middle' font-size='120' font-weight='900' fill='white'>J</text></svg>">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -44,22 +44,22 @@ html:not(.light){
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
 
 /* HEADER */
-#hdr{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:stretch;padding:0 12px;gap:4px}
+#hdr{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:stretch;padding:0 10px;gap:2px}
 html.dark #hdr,html:not(.light) #hdr{background:rgba(23,26,34,.88)}
 @media (prefers-color-scheme: dark){html:not(.light) #hdr{background:rgba(23,26,34,.88)}}
-.hd-logo{display:flex;align-items:center;gap:6px;padding-right:10px;border-right:1px solid var(--border);margin-right:8px;flex-shrink:0}
-.hd-j{width:26px;height:26px;background:linear-gradient(135deg,#f0b429,#e09000);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 2px 6px rgba(200,145,10,.25)}
+.hd-logo{display:flex;align-items:center;gap:6px;padding-right:8px;margin-right:6px;flex-shrink:0}
+.hd-j{width:28px;height:28px;background:linear-gradient(135deg,#1a1f2e,#0a0d15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--gold);flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .hd-name{font-size:11px;font-weight:800;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
-.hd-date{display:none;align-items:center;font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;flex-shrink:0;margin-right:8px}
-@media(min-width:560px){.hd-date{display:flex}}
-.hd-tabs{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;justify-content:flex-end}
+.hd-date{display:none;align-items:center;font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;flex-shrink:0;padding:0 8px}
+@media(min-width:620px){.hd-date{display:flex;border-left:1px solid var(--border);margin-left:4px}}
+.hd-tabs{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;justify-content:flex-start}
 .hd-tabs::-webkit-scrollbar{display:none}
-.hd-tab{display:flex;align-items:center;padding:0 9px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;background:none;color:var(--muted);font-family:'DM Sans',sans-serif;border-bottom:2.5px solid transparent;transition:all .15s;white-space:nowrap}
+.hd-tab{display:flex;align-items:center;padding:0 10px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;border:none;background:none;color:var(--muted);font-family:'DM Sans',sans-serif;border-bottom:2.5px solid transparent;transition:all .15s;white-space:nowrap}
 .hd-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
 .hd-tab:hover:not(.active){color:var(--text)}
 .hd-st{display:none;align-items:center;font-size:9px;color:var(--dim);margin-left:4px;font-family:'JetBrains Mono',monospace;white-space:nowrap;flex-shrink:0}
-@media(min-width:720px){.hd-st{display:flex}}
-@media(max-width:420px){.hd-logo{padding-right:8px;margin-right:4px}.hd-name{display:none}.hd-tab{padding:0 7px;font-size:10px}}
+@media(min-width:780px){.hd-st{display:flex}}
+@media(max-width:480px){.hd-logo{padding-right:6px;margin-right:2px}.hd-name{display:none}.hd-tab{padding:0 8px;letter-spacing:.5px}}
 
 /* COMMAND BAR */
 .cmd-bar{max-width:1120px;margin:0 auto;padding:12px 16px 0}
