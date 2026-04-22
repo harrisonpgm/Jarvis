@@ -1003,8 +1003,11 @@ async function syncSave(){
   const pat=S.sync.pat||document.getElementById('sync-pat').value.trim();
   if(!pat){alert('Enter a GitHub personal access token first');return}
   const gistId=S.sync.gistId||document.getElementById('sync-gist').value.trim();
-  const raw=localStorage.getItem(SK)||'{}';
-  const body={description:'Jarvis backup',files:{'jarvisdata.json':{content:raw}}};
+  // Strip PAT (and lastPush/lastPull) before writing to gist — never let the token leave this device
+  let dataToSync;
+  try{dataToSync=JSON.parse(localStorage.getItem(SK)||'{}')}catch(e){dataToSync={}}
+  if(dataToSync.sync){dataToSync.sync={gistId:dataToSync.sync.gistId||'',lastPush:dataToSync.sync.lastPush||null,lastPull:dataToSync.sync.lastPull||null}}
+  const body={description:'Jarvis sync',public:false,files:{'jarvisdata.json':{content:JSON.stringify(dataToSync)}}};
   const st=document.getElementById('sync-status');
   st.textContent='Pushing...';
   try{
@@ -1033,8 +1036,10 @@ async function syncLoad(){
     if(!confirm('Replace local data with remote copy? (A backup of your current local data will be downloaded first.)'))return;
     // Local backup first
     exportBackup();
-    localStorage.setItem(SK,file.content);
-    S.sync.lastPull=new Date().toISOString();
+    // Merge: take remote data but keep the local PAT and gistId — never overwrite credentials from gist
+    let pulled;try{pulled=JSON.parse(file.content)}catch(e){pulled={}}
+    pulled.sync={...(pulled.sync||{}),pat,gistId,lastPull:new Date().toISOString()};
+    localStorage.setItem(SK,JSON.stringify(pulled));
     st.textContent='✓ Pulled. Reloading...';
     setTimeout(()=>location.reload(),500);
   }catch(err){st.textContent='⚠ Pull failed: '+err.message}
