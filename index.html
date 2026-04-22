@@ -508,6 +508,124 @@ input[type="file"]{display:none}
 /* ERROR DISPLAY (non-destructive) */
 .err-corner{position:fixed;bottom:16px;right:16px;max-width:360px;background:var(--red-bg);border:1.5px solid var(--red);color:var(--red);padding:10px 14px;border-radius:var(--r);font-family:'JetBrains Mono',monospace;font-size:11px;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.15)}
 .err-corner button{background:none;border:none;color:var(--red);cursor:pointer;float:right;font-size:14px;font-weight:700}
+
+/* HOME TASKS CARD */
+.htask-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:14px}
+.htask-hd{padding:9px 12px 8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.htask-title{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);flex:1}
+.htask-cnt{background:var(--gold-bg);color:var(--gold);font-size:10px;font-weight:800;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:10px}
+.htask-day-pills{display:flex;gap:4px}
+.htask-day-pill{padding:4px 11px;border-radius:20px;font-size:10px;font-weight:700;border:1.5px solid var(--border);background:var(--card2);color:var(--muted);cursor:pointer;transition:all .12s;font-family:'DM Sans',sans-serif}
+.htask-day-pill.active{background:var(--gold);border-color:var(--gold);color:#fff}
+.htask-cat-filter{display:flex;gap:3px;flex-wrap:wrap;padding:6px 12px;border-bottom:1px solid var(--border);background:var(--card2)}
+.hcat-chip{padding:3px 9px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.5px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .1s;font-family:'DM Sans',sans-serif;text-transform:uppercase}
+.hcat-chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.htask-list{padding:4px 0;min-height:40px;max-height:380px;overflow-y:auto}
+.htask-empty{padding:16px 14px;font-size:11px;color:var(--dim);text-align:center}
+.htask-item{display:flex;align-items:center;gap:7px;padding:7px 12px;border-bottom:1px solid var(--card2);transition:background .1s}
+.htask-item:last-child{border-bottom:none}
+.htask-item:hover{background:var(--card2)}
+.htask-chk{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border2);background:var(--card2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:9px;transition:all .1s}
+.htask-chk.done{background:var(--green);border-color:var(--green);color:#fff}
+.htask-body{flex:1;min-width:0}
+.htask-text{font-size:12px;color:var(--text);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.htask-text.done{text-decoration:line-through;color:var(--dim)}
+.htask-meta{display:flex;gap:5px;align-items:center;margin-top:1px;flex-wrap:wrap}
+.htask-cat-badge{font-size:8px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:1px 5px;border-radius:3px}
+.htask-due{font-size:9px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.htask-del{color:var(--dim);cursor:pointer;font-size:14px;padding:0 4px;flex-shrink:0;line-height:1}
+.htask-del:hover{color:var(--red)}
+.htask-add{display:flex;gap:6px;padding:8px 12px;border-top:1px solid var(--border);background:var(--card2)}
+.htask-add input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:6px 10px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none}
+.htask-add input:focus{border-color:var(--gold)}
+.htask-add button{background:linear-gradient(135deg,#f0b429,#d9a020);border:none;border-radius:var(--rs);padding:6px 14px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif}
+
+/* HOME SECTIONS — collapsible */
+.hs-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:10px}
+.hs-hd{display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;user-select:none;transition:background .12s}
+.hs-hd:hover{background:var(--card2)}
+.hs-icon{font-size:14px;flex-shrink:0}
+.hs-title{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;flex:1;color:var(--text)}
+.hs-badge{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);flex-shrink:0}
+.hs-chv{font-size:12px;color:var(--dim);flex-shrink:0;transition:transform .2s;display:inline-block}
+.hs-chv.closed{transform:rotate(-90deg)}
+.hs-body{border-top:1px solid var(--border)}
+.hs-body.closed{display:none}
+/* strip card styling inside hs-body since section provides the wrapper */
+.hs-body .card{border:none;border-radius:0;box-shadow:none;border-bottom:1px solid var(--border)}
+.hs-body .card:last-child{border-bottom:none}
+
+/* PLAN TAB — compact date chip carousel + collapsible recur */
+.plan-date-chips{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap;padding-bottom:1px}
+.plan-date-chips::-webkit-scrollbar{display:none}
+.plan-dc{flex-shrink:0;padding:3px 8px;border-radius:12px;font-size:9px;font-weight:700;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .1s;white-space:nowrap}
+.plan-dc.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.plan-dc.later{background:var(--card2)}
+.plan-recur-toggle{display:flex;align-items:center;gap:4px;cursor:pointer;margin-top:4px;padding:2px 0}
+.plan-recur-toggle span{font-size:9px;color:var(--dim);font-weight:700;letter-spacing:.5px;user-select:none}
+.plan-recur-toggle .plan-rchv{font-size:9px;color:var(--dim);transition:transform .15s;display:inline-block}
+.plan-recur-toggle .plan-rchv.open{transform:rotate(90deg)}
+.plan-rec-chips{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px;padding-top:4px;border-top:1px dashed var(--border)}
+.plan-rc{padding:3px 9px;border-radius:12px;font-size:9px;font-weight:700;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .1s}
+.plan-rc.active{background:var(--green);border-color:var(--green);color:#fff}
+@media(max-width:900px){.plan-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.plan-grid{grid-template-columns:1fr}}
+.plan-col{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.plan-col-hd{padding:9px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.plan-col-title{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}
+.plan-col-cnt{font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--muted)}
+.plan-items{padding:4px 0;min-height:32px}
+.plan-item{display:flex;align-items:center;gap:6px;padding:6px 10px;border-bottom:1px solid var(--card2)}
+.plan-item:last-child{border-bottom:none}
+.plan-chk{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border2);background:var(--card2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:8px}
+.plan-chk.done{background:var(--green);border-color:var(--green);color:#fff}
+.plan-text{flex:1;min-width:0;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.plan-text.done{text-decoration:line-through;color:var(--dim)}
+.plan-due{font-size:8.5px;font-weight:600;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.plan-rec{font-size:8px;color:var(--muted);flex-shrink:0}
+.plan-del{color:var(--dim);cursor:pointer;font-size:13px;padding:0 3px;flex-shrink:0}
+.plan-del:hover{color:var(--red)}
+.plan-add{padding:8px 10px;border-top:1px solid var(--border);background:var(--card2)}
+.plan-add-row{display:flex;gap:5px;margin-bottom:5px}
+.plan-add-inp{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:5px 8px;font-size:11.5px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none}
+.plan-add-inp:focus{border-color:var(--accent)}
+.plan-add-btn{background:var(--accent);border:none;border-radius:var(--rs);padding:5px 10px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.plan-empty{padding:10px;font-size:10px;color:var(--dim);text-align:center}
+
+/* BUY LIST */
+.buy-section{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:14px}
+.buy-hd{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.buy-title{font-size:13px;font-weight:800;color:var(--teal)}
+.buy-filters{display:flex;gap:4px}
+.buy-f{padding:4px 10px;border-radius:20px;border:1.5px solid var(--border);background:var(--card2);color:var(--muted);font-size:10px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .12s}
+.buy-f.active{background:var(--teal);border-color:var(--teal);color:#fff}
+.buy-add{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--card2);flex-wrap:wrap;align-items:center}
+.buy-add-inp{flex:1;min-width:160px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:6px 10px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none}
+.buy-add-inp:focus{border-color:var(--teal)}
+.buy-cat-sel{display:flex;gap:3px}
+.buy-cs{padding:4px 10px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-size:9px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .1s;text-transform:uppercase;letter-spacing:.5px}
+.buy-cs.active{background:var(--teal);border-color:var(--teal);color:#fff}
+.buy-add-btn{background:var(--teal);border:none;border-radius:var(--rs);padding:6px 14px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif}
+.buy-groups{padding:4px 0}
+.buy-group-hd{padding:5px 14px;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);background:var(--card2);border-bottom:1px solid var(--border);border-top:1px solid var(--border)}
+.buy-item{display:flex;align-items:center;gap:8px;padding:7px 14px;border-bottom:1px solid var(--card2)}
+.buy-item:last-child{border-bottom:none}
+.buy-chk{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border2);background:var(--card2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:9px}
+.buy-chk.done{background:var(--teal);border-color:var(--teal);color:#fff}
+.buy-text{flex:1;font-size:12px}
+.buy-text.done{text-decoration:line-through;color:var(--dim)}
+.buy-del{color:var(--dim);cursor:pointer;font-size:13px;padding:0 4px}
+.buy-del:hover{color:var(--red)}
+.buy-empty{padding:20px;text-align:center;font-size:11px;color:var(--dim)}
+
+/* CALENDAR EDIT MODAL */
+.cal-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px}
+.cal-modal{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:16px;width:100%;max-width:340px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.cal-modal-hd{font-size:13px;font-weight:800;margin-bottom:10px;color:var(--text)}
+.cal-modal-inp{width:100%;background:var(--card2);border:1.5px solid var(--border);border-radius:var(--rs);padding:8px 10px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;margin-bottom:10px}
+.cal-modal-inp:focus{border-color:var(--gold)}
+.cal-modal-btns{display:flex;gap:6px;justify-content:flex-end}
+.cal-modal-btns button{padding:7px 14px;border-radius:var(--rs);font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;border:none}
 </style>
 </head>
 <body>
@@ -526,6 +644,7 @@ window.onerror=function(m,s,l,c,e){
   <div class="hd-date" id="hd-date"></div>
   <div class="hd-tabs">
     <button class="hd-tab active" data-tab="life" onclick="switchTab('life')">Board</button>
+    <button class="hd-tab" data-tab="plan" onclick="switchTab('plan')">Plan</button>
     <button class="hd-tab" data-tab="health" onclick="switchTab('health')">Health</button>
     <button class="hd-tab" data-tab="workouts" onclick="switchTab('workouts')">Workouts</button>
     <button class="hd-tab" data-tab="nutrition" onclick="switchTab('nutrition')">Nutrition</button>
@@ -550,41 +669,113 @@ window.onerror=function(m,s,l,c,e){
     <div id="holi-wrap"></div>
     <div id="wr-wrap"></div>
     <div class="date-nav" id="dn"></div>
-    <div class="board-grid">
-      <div>
-        <div class="slabel-row">
-          <div class="slabel">To Do</div>
-          <button class="arch-tgl" id="arch-tgl" onclick="toggleArchive()">Show Completed</button>
-        </div>
-        <div class="todo-grid" id="tg"></div>
+
+    <!-- Today's Tasks -->
+    <div class="hs-wrap">
+      <div class="hs-hd" onclick="toggleHS('tasks')">
+        <span class="hs-icon">✓</span>
+        <span class="hs-title">Today's Tasks</span>
+        <span id="hs-tasks-info" class="hs-badge"></span>
+        <span class="hs-chv" id="hs-chv-tasks">▾</span>
       </div>
-      <div class="rpanel">
-        <div class="card" id="ac"></div>
-        <div class="card">
-          <div class="card-h">
-            <span class="card-l" style="color:var(--accent)">Today's Activity</span>
-            <span style="font-size:10px;color:var(--muted)" id="wp"></span>
+      <div class="hs-body" id="hs-body-tasks">
+        <div id="htask-wrap"></div>
+      </div>
+    </div>
+
+    <!-- Nutrition -->
+    <div class="hs-wrap">
+      <div class="hs-hd" onclick="toggleHS('nutrition')">
+        <span class="hs-icon">🥗</span>
+        <span class="hs-title">Nutrition</span>
+        <span id="nd" class="hs-badge" style="font-family:'JetBrains Mono',monospace"></span>
+        <span class="hs-chv" id="hs-chv-nutrition">▾</span>
+      </div>
+      <div class="hs-body" id="hs-body-nutrition">
+        <div class="nb" id="nbars"></div>
+        <div class="nm" id="nmeals"></div>
+        <div class="nia">
+          <div class="nir">
+            <input class="ni" id="nin" placeholder="Type food name..." oninput="showSug()" onkeydown="if(event.key==='Enter'){hideSug();logMeal()}" onfocus="showSug()" onblur="setTimeout(hideSug,200)">
+            <button class="bc" onclick="tryPhoto()">📷</button>
+            <button class="bl" id="nbtn" onclick="logMeal()">Log</button>
+            <div class="nsg" id="nsug" style="display:none"></div>
           </div>
-          <div class="act-pills" id="act-pills"></div>
-          <div id="act-body"></div>
+          <div class="nh">Search your food library or type anything</div>
         </div>
-        <div class="card">
-          <div class="card-h">
-            <span class="card-l" style="color:var(--green)">Nutrition</span>
-            <span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="nd"></span>
-          </div>
-          <div class="nb" id="nbars"></div>
-          <div class="nm" id="nmeals"></div>
-          <div class="nia">
-            <div class="nir">
-              <input class="ni" id="nin" placeholder="Type food name..." oninput="showSug()" onkeydown="if(event.key==='Enter'){hideSug();logMeal()}" onfocus="showSug()" onblur="setTimeout(hideSug,200)">
-              <button class="bc" onclick="tryPhoto()">📷</button>
-              <button class="bl" id="nbtn" onclick="logMeal()">Log</button>
-              <div class="nsg" id="nsug" style="display:none"></div>
-            </div>
-            <div class="nh">Search your food library or type anything</div>
+      </div>
+    </div>
+
+    <!-- Activities This Week -->
+    <div class="hs-wrap">
+      <div class="hs-hd" onclick="toggleHS('activities')">
+        <span class="hs-icon">📅</span>
+        <span class="hs-title">Activities This Week</span>
+        <span id="hs-act-info" class="hs-badge"></span>
+        <span class="hs-chv" id="hs-chv-activities">▾</span>
+      </div>
+      <div class="hs-body" id="hs-body-activities">
+        <div id="ac"></div>
+      </div>
+    </div>
+
+    <!-- Buy List (mirror) -->
+    <div class="hs-wrap">
+      <div class="hs-hd" onclick="toggleHS('buylist')">
+        <span class="hs-icon">🛒</span>
+        <span class="hs-title">Buy List</span>
+        <span id="hs-buy-info" class="hs-badge"></span>
+        <span class="hs-chv" id="hs-chv-buylist">▾</span>
+      </div>
+      <div class="hs-body" id="hs-body-buylist">
+        <div id="home-buy-list"></div>
+      </div>
+    </div>
+
+    <!-- Today's Activity -->
+    <div class="hs-wrap">
+      <div class="hs-hd" onclick="toggleHS('todayact')">
+        <span class="hs-icon">🏋️</span>
+        <span class="hs-title">Today's Activity</span>
+        <span id="wp" class="hs-badge"></span>
+        <span class="hs-chv" id="hs-chv-todayact">▾</span>
+      </div>
+      <div class="hs-body" id="hs-body-todayact">
+        <div class="act-pills" id="act-pills"></div>
+        <div id="act-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAN TAB -->
+  <div id="tab-plan" style="display:none">
+    <div class="plan-wrap">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div style="font-size:16px;font-weight:800">Planning Board</div>
+        <button class="arch-tgl" id="plan-arch-tgl" onclick="togglePlanArchive()">Show Completed</button>
+      </div>
+      <div class="plan-grid" id="plan-tg"></div>
+      <!-- Buy List -->
+      <div class="buy-section">
+        <div class="buy-hd">
+          <div class="buy-title">🛒 Buy List</div>
+          <div class="buy-filters">
+            <button class="buy-f active" data-bf="all" onclick="setBuyFilter('all')">All</button>
+            <button class="buy-f" data-bf="groceries" onclick="setBuyFilter('groceries')">Groceries</button>
+            <button class="buy-f" data-bf="needs" onclick="setBuyFilter('needs')">Needs</button>
+            <button class="buy-f" data-bf="wants" onclick="setBuyFilter('wants')">Wants</button>
           </div>
         </div>
+        <div class="buy-add">
+          <input class="buy-add-inp" id="buy-inp" placeholder="Add item..." onkeydown="if(event.key==='Enter')addBuy()">
+          <div class="buy-cat-sel">
+            <button class="buy-cs active" data-bcs="groceries" onclick="setBuyCat('groceries')">Groceries</button>
+            <button class="buy-cs" data-bcs="needs" onclick="setBuyCat('needs')">Need</button>
+            <button class="buy-cs" data-bcs="wants" onclick="setBuyCat('wants')">Want</button>
+          </div>
+          <button class="buy-add-btn" onclick="addBuy()">+ Add</button>
+        </div>
+        <div class="buy-groups" id="buy-list"></div>
       </div>
     </div>
   </div>
@@ -696,6 +887,17 @@ window.onerror=function(m,s,l,c,e){
       <div class="set-help">
         Create a token at <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> with <b>gist</b> scope only. Token is stored locally in this browser.
       </div>
+    </div>
+
+    <!-- Anthropic API key -->
+    <div class="set-sec">
+      <div class="set-sec-h">AI Command Bar</div>
+      <div class="set-row2">
+        <input class="set-inp" id="ak-inp" placeholder="Anthropic API key (sk-ant-...)" type="password" style="flex:1">
+        <button class="set-btn" onclick="saveAK()">Save key</button>
+        <span id="ak-status" style="font-size:10px;color:var(--muted)"></span>
+      </div>
+      <div class="set-help">Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>. Stored locally only — never synced to gist.</div>
     </div>
 
     <!-- Calendar Import -->
@@ -825,9 +1027,12 @@ let S={
   holiMode:'auto',                // 'auto' | 'on' | 'off'
   sync:{pat:'',gistId:'',lastPush:null,lastPull:null},
   wrDismissed:'',                 // ISO week stamp last dismissed
+  buys:[],                        // [{id, text, category:'groceries'|'needs'|'wants', done, addedAt}]
+  lastRecMonthly:null,            // 'YYYY-MM' — monthly recurring generation stamp
   // Transient UI state (not persisted)
   expEx:null,cFilter:'all',woTab:'fullA',woTabEx:null,dateSel:{},recMode:{},
-  selDate:'',weekOff:0,nSearch:'',showArchive:false,
+  selDate:'',weekOff:0,nSearch:'',showArchive:false,planShowArchive:false,
+  buyFilter:'all',buyCat:'groceries',homeTodoDays:{today:true,tomorrow:false},homeTodoCat:'all',
 };
 let drag={};
 let undoStack=[];  // last 10 deleted items for undo
@@ -866,8 +1071,11 @@ function wActs(){const days=gWk(S.weekOff);let r={gym:0,park:0,golf:0,hockey:0};
 function lost(){return Math.max(0,Math.round((SW-S.curWeight)*10)/10)}
 function pctL(){return Math.min(100,Math.round(lost()/(SW-TW)*100))}
 
-// Merged calendar (defaults + user-added)
-function getCal(date){return S.userCal[date]||DEFAULT_CAL[date]||''}
+// Merged calendar: userCal takes precedence; '' means explicitly cleared (overrides DEFAULT_CAL)
+function getCal(date){
+  if(Object.prototype.hasOwnProperty.call(S.userCal,date))return S.userCal[date]||'';
+  return DEFAULT_CAL[date]||'';
+}
 
 // Is a given date (YYYY-MM-DD) a holiday? Controlled by holi mode + calendar markers
 function isHoliday(dateKey){
@@ -892,6 +1100,71 @@ let stTimer=null;
 
 function stMsg(m){const el=document.getElementById('hd-st-txt');if(el){el.textContent=m;setTimeout(()=>{if(el.textContent===m)el.textContent=''},2500)}}
 
+// ================================================================
+// API KEY — stored separately from sync blob, never leaves device
+// ================================================================
+const AK_KEY='jarvisak';
+function getAK(){try{return localStorage.getItem(AK_KEY)||''}catch(e){return''}}
+function saveAK(){
+  const val=document.getElementById('ak-inp')?.value.trim()||'';
+  try{if(val)localStorage.setItem(AK_KEY,val);else localStorage.removeItem(AK_KEY);}catch(e){}
+  const st=document.getElementById('ak-status');
+  if(st)st.textContent=val?'✓ Saved':'Cleared';
+  setTimeout(()=>{const s=document.getElementById('ak-status');if(s)s.textContent=''},2000);
+}
+
+// ================================================================
+// HOME SECTION COLLAPSE — all open by default
+// ================================================================
+if(!S.homeOpen)S.homeOpen={tasks:true,nutrition:true,activities:true,buylist:true,todayact:true};
+function toggleHS(key){
+  if(!S.homeOpen)S.homeOpen={};
+  S.homeOpen[key]=!S.homeOpen[key];
+  const body=document.getElementById('hs-body-'+key);
+  const chv=document.getElementById('hs-chv-'+key);
+  if(body)body.classList.toggle('closed',!S.homeOpen[key]);
+  if(chv)chv.classList.toggle('closed',!S.homeOpen[key]);
+}
+function applyHSSections(){
+  if(!S.homeOpen)return;
+  Object.entries(S.homeOpen).forEach(([k,open])=>{
+    const body=document.getElementById('hs-body-'+k);
+    const chv=document.getElementById('hs-chv-'+k);
+    if(body)body.classList.toggle('closed',!open);
+    if(chv)chv.classList.toggle('closed',!open);
+  });
+}
+
+// ================================================================
+// HOME BUY LIST — read-only mirror of the buy list for the board tab
+// ================================================================
+function renderHomeBuyList(){
+  const el=document.getElementById('home-buy-list');if(!el)return;
+  const buys=S.buys||[];
+  const active=buys.filter(b=>!b.done);
+  const countEl=document.getElementById('hs-buy-info');
+  if(countEl)countEl.textContent=active.length?active.length+' items':'';
+  if(!buys.length){el.innerHTML='<div style="padding:12px 14px;font-size:11px;color:var(--dim)">Nothing on the list — add items in the Plan tab</div>';return}
+  const cats=['groceries','needs','wants'];
+  const catLabels={groceries:'🛒 Groceries',needs:'✅ Needs',wants:'💛 Wants'};
+  let html='';
+  let hasAny=false;
+  cats.forEach(c=>{
+    const items=buys.filter(b=>b.category===c);
+    if(!items.length)return;
+    hasAny=true;
+    html+=`<div class="buy-group-hd">${catLabels[c]}</div>`;
+    items.forEach(b=>{
+      html+=`<div class="buy-item">
+        <div class="buy-chk ${b.done?'done':''}" onclick="togBuy('${b.id}');renderHomeBuyList()">${b.done?'✓':''}</div>
+        <span class="buy-text ${b.done?'done':''}">${E(b.text)}</span>
+        <span class="buy-del" onclick="delBuy('${b.id}');renderHomeBuyList()">×</span>
+      </div>`;
+    });
+  });
+  el.innerHTML=hasAny?html:'<div class="buy-empty">All done!</div>';
+}
+
 function loadState(){
   try{
     const raw=localStorage.getItem(SK);
@@ -906,6 +1179,8 @@ function loadState(){
       }
       // Seed default course library if empty (new install or existing users upgrading)
       if(!S.courses||!S.courses.length)S.courses=seedCourses();
+      // Migrate: ensure buys array exists
+      if(!S.buys)S.buys=[];
       // Migration: an earlier build seeded Chelsfield Lakes with guessed pars.
       // If the user still has those exact guessed values (hasn't edited them), replace
       // with the correct scorecard data. Anyone who already edited their pars is left alone.
@@ -945,7 +1220,8 @@ function save(){
     curWeight:S.curWeight,weights:S.weights,injections:S.injections,mood:S.mood,
     workoutLogs:S.workoutLogs,runs:S.runs,rounds:S.rounds,courses:S.courses,boardAct:S.boardAct,
     userCal:S.userCal,archiveCompleted:S.archiveCompleted,
-    theme:S.theme,holiMode:S.holiMode,sync:S.sync,wrDismissed:S.wrDismissed};
+    theme:S.theme,holiMode:S.holiMode,sync:S.sync,wrDismissed:S.wrDismissed,
+    buys:S.buys,lastRecMonthly:S.lastRecMonthly};
   try{localStorage.setItem(SK,JSON.stringify(d));stMsg('✓ Saved')}catch(e){stMsg('⚠ Storage full')}
 }
 
@@ -1133,17 +1409,29 @@ function genRec(){
     });
     S.lastRecWeekly=wk;
   }
+  // Monthly — one instance per calendar month, due on the saved day-of-month
+  const monthKey=TK.substring(0,7); // 'YYYY-MM'
+  if(S.lastRecMonthly!==monthKey){
+    S.recDefs.filter(d=>d.recurType==='monthly').forEach(d=>{
+      const day=d.recurDay||1;
+      const dueDate=monthKey+'-'+String(Math.min(day,28)).padStart(2,'0');
+      if(!S.todos.some(t=>t.recurId===d.id&&t.dueDate===dueDate)){
+        S.todos.push({id:uid(),category:d.category,text:d.text,dueDate,completed:false,createdAt:new Date().toISOString(),recurId:d.id,recurType:'monthly'});
+      }
+    });
+    S.lastRecMonthly=monthKey;
+  }
   qS();
 }
 
 // ================================================================
-// COMMAND BAR — local-first parser + Claude API fallback (when available)
+// COMMAND BAR — AI-first routing (Haiku), regex fallback if API unavailable
 // ================================================================
 
 const FOOD_WORDS=/\b(chicken|fish|salmon|steak|burger|pizza|pasta|rice|eggs|toast|porridge|shake|protein|yoghurt|banana|apple|soup|salad|wrap|curry|fajita|sandwich|cereal|latte|coffee|beer|wine|pint|chips|nuts|chocolate|bar|oats|pie|fishcake|jerky|sweet potato)\b/i;
 const TASK_WORDS=/\b(buy|call|book|fix|clean|email|send|remind|order|cancel|check|schedule|research|organise|organize|arrange|pick up|wash|repair|install|replace|move|sort|tidy|vacuum|hoover|iron|mow|paint|get|make|return|post|collect|drop off|set up|look into|find|plan|prepare|register|sign up|renew|review|update|submit|chase|follow up)\b/i;
 
-function parseCmd(txt){
+function parseCmdFallback(txt){
   const l=txt.toLowerCase();
   if(/\bhockey\b/i.test(txt)&&!/\bhockey dinner\b/i.test(txt))return{action:'activity',type:'hockey'};
   if(/\b(did|done|played|went|completed|finished|logged)\b/i.test(txt)){
@@ -1177,10 +1465,41 @@ function parseCmd(txt){
   return{action:'todo',text:clean||txt,category:'life',dueDate:due}
 }
 
+async function parseCmdAI(txt){
+  const ak=getAK();
+  if(!ak)return null; // no key configured — fall through to regex
+  const todayStr=TK;
+  const tomorrowStr=dOff(1);
+  const sys=`You are a command router for a personal life planner app. Parse the user's command and return ONLY a JSON object, no markdown, no explanation.
+
+Actions available:
+- todo: a task to add. Fields: action, text (cleaned), category (work|health|house|life), dueDate (YYYY-MM-DD or null), recurType (daily|weekly|monthly|null)
+- meal: log food/drink. Fields: action, food (original text)
+- weight: log body weight. Fields: action, value (number in kg)
+- activity: log a workout session. Fields: action, type (gym|park|golf|hockey)
+- content: add to watch/read list. Fields: action, title, type (film|tv|book|podcast), withKatie (bool)
+- buy: add to buy list. Fields: action, text, buyCategory (groceries|needs|wants)
+
+Context: today is ${todayStr}, tomorrow is ${tomorrowStr}.
+For dueDate: interpret "today", "tomorrow", day names (next occurring), "this week" etc. Return YYYY-MM-DD.
+For category guessing: work = job/email/cv/meeting, health = gym/doctor/vitamins/weight, house = cleaning/repairs/DIY, life = social/fun/errands.
+For buy list: groceries = food/drink to buy in a supermarket, needs = practical non-food items needed, wants = discretionary/wishlist purchases.
+Return only valid JSON.`;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':ak,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:200,system:sys,messages:[{role:'user',content:txt}]})});
+    const d=await r.json();
+    const raw=d.content?.[0]?.text||'';
+    const clean=raw.trim().replace(/```json?|```/g,'').trim();
+    return JSON.parse(clean);
+  }catch(e){return null}
+}
+
 async function runCmd(){
   const inp=document.getElementById('cmd-in'),btn=document.getElementById('cmd-btn'),res=document.getElementById('cmd-res'),txt=inp.value.trim();
   if(!txt)return;btn.disabled=true;btn.textContent='...';res.textContent='';res.style.color='var(--green)';
-  const cmd=parseCmd(txt);
+  // Try AI first, fall back to regex
+  let cmd=await parseCmdAI(txt);
+  if(!cmd)cmd=parseCmdFallback(txt);
   if(cmd.action==='weight'){logWeight(cmd.value);res.textContent=`✓ Weight: ${cmd.value}kg (${lost()}kg lost)`;inp.value=''}
   else if(cmd.action==='meal'){
     const match=S.foods.find(f=>txt.toLowerCase().includes(f.name.toLowerCase().split('(')[0].trim().toLowerCase()));
@@ -1191,13 +1510,17 @@ async function runCmd(){
       if(!meal)meal={name:txt.substring(0,30),cals:350,protein:15};
       meal.id=uid();meal.time=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});today.meals.push(meal);S.nutrition[S.selDate]=today;qS();renderNut();res.textContent=`✓ Logged: ${meal.name} (${meal.cals}kcal, ${meal.protein}g)`;inp.value=''}
   }
-  else if(cmd.action==='todo'){S.todos.push({id:uid(),category:cmd.category,text:cmd.text,dueDate:cmd.dueDate||null,completed:false,createdAt:new Date().toISOString()});qS();renderTodos();res.textContent=`✓ Todo (${cmd.category}): ${cmd.text}`;inp.value=''}
-  else if(cmd.action==='content'){S.content.unshift({id:uid(),title:cmd.title,type:cmd.type,withKatie:cmd.withKatie||false,watched:false,addedAt:new Date().toISOString()});qS();renderCt();res.textContent=`✓ Content: ${cmd.title} (${cmd.type})`;inp.value=''}
+  else if(cmd.action==='todo'){S.todos.push({id:uid(),category:cmd.category||'life',text:cmd.text||txt,dueDate:cmd.dueDate||null,completed:false,createdAt:new Date().toISOString(),recurType:cmd.recurType||null});qS();renderHomeTodos();renderPlanTodos();res.textContent=`✓ Todo (${cmd.category||'life'}): ${cmd.text||txt}`;inp.value=''}
+  else if(cmd.action==='buy'){S.buys.push({id:uid(),text:cmd.text||txt,category:cmd.buyCategory||'groceries',done:false,addedAt:new Date().toISOString()});qS();renderBuyList();res.textContent=`✓ Buy list (${cmd.buyCategory||'groceries'}): ${cmd.text||txt}`;inp.value=''}
+  else if(cmd.action==='content'){S.content.unshift({id:uid(),title:cmd.title||txt,type:cmd.type||'film',withKatie:cmd.withKatie||false,watched:false,addedAt:new Date().toISOString()});qS();renderCt();res.textContent=`✓ Content: ${cmd.title||txt} (${cmd.type||'film'})`;inp.value=''}
   else if(cmd.action==='activity'){logAct(cmd.type);res.textContent=`✓ Logged: ${cmd.type} session`;inp.value=''}
   btn.disabled=false;btn.textContent='Go';
 }
 
-async function callAI(sys,msg){try{const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,system:sys,messages:[{role:'user',content:msg}]})});const d=await r.json();return d.content?.[0]?.text||''}catch(e){return''}}
+async function callAI(sys,msg){
+  const ak=getAK();if(!ak)return'';
+  try{const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':ak,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:400,system:sys,messages:[{role:'user',content:msg}]})});const d=await r.json();return d.content?.[0]?.text||''}catch(e){return''}
+}
 
 // ================================================================
 // VOICE INPUT — Web Speech API (Chromium + Safari)
@@ -1249,24 +1572,132 @@ function undoLast(){
 // TODOS — incl edit, swipe-to-delete, auto-archive, safe recurring delete
 // ================================================================
 
-function setChip(cat,days){S.dateSel[cat]=S.dateSel[cat]===days?null:days;document.querySelectorAll(`.ch.ad[data-c="${cat}"]`).forEach(el=>el.classList.toggle('active',parseInt(el.dataset.d)===S.dateSel[cat]))}
-function setRec(cat,type){S.recMode[cat]=S.recMode[cat]===type?null:type;document.querySelectorAll(`.ch.ar[data-c="${cat}"]`).forEach(el=>el.classList.toggle('active',el.dataset.t===S.recMode[cat]))}
+// dateSel[cat] = number (0-6 days offset) | 'YYYY-MM-DD' (specific) | null
+function setChip(cat,val){
+  S.dateSel[cat]=S.dateSel[cat]===val?null:val;
+  // Update chip highlights
+  document.querySelectorAll(`.plan-dc[data-c="${cat}"]`).forEach(el=>{
+    el.classList.toggle('active',String(el.dataset.d)===String(S.dateSel[cat]));
+  });
+}
+function setChipDate(cat,val){
+  // Called from the date input
+  S.dateSel[cat]=val||null;
+  document.querySelectorAll(`.plan-dc[data-c="${cat}"]`).forEach(el=>el.classList.remove('active'));
+}
+function setRec(cat,type){S.recMode[cat]=S.recMode[cat]===type?null:type;document.querySelectorAll(`.plan-rc[data-c="${cat}"]`).forEach(el=>el.classList.toggle('active',el.dataset.t===S.recMode[cat]))}
 
 function addTF(cat){
-  const t=document.getElementById('ti-'+cat),text=t.value.trim();if(!text)return;
-  const ds=S.dateSel[cat]!=null?dOff(S.dateSel[cat]):null;
+  const t=document.getElementById('pti-'+cat),text=t?t.value.trim():'';if(!text)return;
+  let ds=null;
+  if(S.dateSel[cat]!=null){
+    ds=typeof S.dateSel[cat]==='number'?dOff(S.dateSel[cat]):S.dateSel[cat];
+  }
   const rt=S.recMode[cat]||null;
+  const recurDay=rt==='monthly'?NOW.getDate():undefined;
   const todo={id:uid(),category:cat,text,dueDate:ds,completed:false,createdAt:new Date().toISOString(),recurType:rt};
   if(rt){
     const defId='r'+uid();
-    S.recDefs.push({id:defId,text,category:cat,recurType:rt});
+    const def={id:defId,text,category:cat,recurType:rt};
+    if(recurDay)def.recurDay=recurDay;
+    S.recDefs.push(def);
     todo.recurId=defId;
   }
   S.todos.push(todo);
-  qS();t.value='';S.dateSel[cat]=null;S.recMode[cat]=null;renderTodos();
+  qS();if(t)t.value='';S.dateSel[cat]=null;S.recMode[cat]=null;
+  renderPlanTodos();renderHomeTodos();
 }
 
-function togT(id){const t=S.todos.find(x=>x.id===id);if(t){t.completed=!t.completed;t.completedAt=t.completed?new Date().toISOString():null;qS();renderTodos()}}
+// ================================================================
+// HOME TASKS CARD — compact today/tomorrow view on the Board tab
+// ================================================================
+const CAT_SORT={work:0,health:1,house:2,life:3};
+const CAT_COLORS={work:'var(--accent)',health:'var(--green)',house:'var(--teal)',life:'var(--purple)'};
+const CAT_BG={work:'var(--accent-bg)',health:'var(--green-bg)',house:'var(--teal-bg)',life:'var(--purple-bg)'};
+
+function renderHomeTodos(){
+  const el=document.getElementById('htask-wrap');if(!el)return;
+  const {today,tomorrow}=S.homeTodoDays||{today:true,tomorrow:false};
+  const catF=S.homeTodoCat||'all';
+  // Build date set to show
+  const dates=[];
+  if(today)dates.push(TK);
+  if(tomorrow)dates.push(dOff(1));
+  // Get visible todos
+  let items=S.todos.filter(t=>{
+    if(isArchived(t))return false;
+    if(catF!=='all'&&t.category!==catF)return false;
+    if(!dates.length)return !t.completed; // if no day selected, show all active
+    return t.dueDate&&dates.includes(t.dueDate);
+  });
+  // Sort: due date first (today before tomorrow), then category priority, then manual order
+  items.sort((a,b)=>{
+    const da=a.dueDate||'9999',db=b.dueDate||'9999';
+    if(da!==db)return da<db?-1:1;
+    return (CAT_SORT[a.category]??3)-(CAT_SORT[b.category]??3);
+  });
+  const activeCount=items.filter(t=>!t.completed).length;
+  const todayActive=today?`<button class="htask-day-pill ${today?'active':''}" onclick="toggleHomeTodayDay('today')" style="${today?'':''}">Today</button>`:'<button class="htask-day-pill" onclick="toggleHomeTodayDay(\'today\')">Today</button>';
+  const tomorrowActive=`<button class="htask-day-pill ${tomorrow?'active':''}" onclick="toggleHomeTodayDay('tomorrow')">Tomorrow</button>`;
+  // Cat filter chips
+  const cats=[{k:'all',l:'All'},{k:'work',l:'Work'},{k:'health',l:'Health'},{k:'house',l:'House'},{k:'life',l:'Life'}];
+  const catChips=cats.map(c=>`<button class="hcat-chip ${catF===c.k?'active':''}" onclick="setHomeTodoCat('${c.k}')">${c.l}</button>`).join('');
+  let listHtml='';
+  if(!items.length){
+    listHtml=`<div class="htask-empty">${dates.length?'All clear for '+(today&&tomorrow?'today and tomorrow':today?'today':'tomorrow'):'Select a day above'} ✓</div>`;
+  } else {
+    items.forEach(t=>{
+      const due=fDue(t.dueDate);
+      const catColor=CAT_COLORS[t.category]||'var(--muted)';
+      const catBg=CAT_BG[t.category]||'var(--card2)';
+      listHtml+=`<div class="htask-item" ontouchstart="swStart(event,'${t.id}')" ontouchmove="swMove(event,'${t.id}')" ontouchend="swEnd(event,'${t.id}','todo')" ontouchcancel="swEnd(event,'${t.id}','todo')">
+        <div class="htask-chk ${t.completed?'done':''}" onclick="togHT('${t.id}')">${t.completed?'✓':''}</div>
+        <div class="htask-body">
+          <div class="htask-text ${t.completed?'done':''}">${E(t.text)}</div>
+          <div class="htask-meta">
+            <span class="htask-cat-badge" style="background:${catBg};color:${catColor}">${t.category.toUpperCase()}</span>
+            ${due?`<span class="htask-due" style="color:${due.c==='overdue'?'var(--red)':due.c==='today2'?'var(--green)':'var(--muted)'}">${E(due.l)}</span>`:''}
+            ${t.recurType?`<span style="font-size:8px;color:var(--dim)">↻</span>`:''}
+          </div>
+        </div>
+        <span class="htask-del" onclick="delT('${t.id}')">×</span>
+      </div>`;
+    });
+  }
+  el.innerHTML=`<div class="htask-card">
+    <div class="htask-hd">
+      <span class="htask-title">Today's Tasks</span>
+      <span class="htask-cnt">${activeCount}</span>
+      <div class="htask-day-pills">
+        <button class="htask-day-pill ${today?'active':''}" onclick="toggleHomeTodayDay('today')">Today</button>
+        <button class="htask-day-pill ${tomorrow?'active':''}" onclick="toggleHomeTodayDay('tomorrow')">Tomorrow</button>
+      </div>
+    </div>
+    <div class="htask-cat-filter">${catChips}</div>
+    <div class="htask-list">${listHtml}</div>
+    <div class="htask-add">
+      <input id="htask-inp" placeholder="Quick add task..." onkeydown="if(event.key==='Enter')addHomeTodo()">
+      <button onclick="addHomeTodo()">Add</button>
+    </div>
+  </div>`;
+}
+
+function toggleHomeTodayDay(day){
+  if(!S.homeTodoDays)S.homeTodoDays={today:true,tomorrow:false};
+  S.homeTodoDays[day]=!S.homeTodoDays[day];
+  renderHomeTodos();
+}
+function setHomeTodoCat(cat){S.homeTodoCat=cat;renderHomeTodos()}
+function togHT(id){const t=S.todos.find(x=>x.id===id);if(t){t.completed=!t.completed;t.completedAt=t.completed?new Date().toISOString():null;qS();renderHomeTodos();renderPlanTodos()}}
+function addHomeTodo(){
+  const inp=document.getElementById('htask-inp');if(!inp)return;
+  const text=inp.value.trim();if(!text)return;
+  const dueDate=(S.homeTodoDays&&S.homeTodoDays.today)?TK:(S.homeTodoDays&&S.homeTodoDays.tomorrow)?dOff(1):null;
+  S.todos.push({id:uid(),category:'life',text,dueDate,completed:false,createdAt:new Date().toISOString()});
+  qS();inp.value='';renderHomeTodos();renderPlanTodos();
+}
+
+function togT(id){const t=S.todos.find(x=>x.id===id);if(t){t.completed=!t.completed;t.completedAt=t.completed?new Date().toISOString():null;qS();renderHomeTodos();renderPlanTodos()}}
 
 // FIXED: deleting a todo no longer deletes its recurring definition.
 // To stop a recurring rule from repeating, the user must remove it from Settings.
@@ -1275,7 +1706,7 @@ function delT(id){
   const idx=S.todos.indexOf(t);
   S.todos.splice(idx,1);
   pushUndo({undo:()=>S.todos.splice(idx,0,t)});
-  qS();renderTodos();
+  qS();renderHomeTodos();renderPlanTodos();
   toast(`Deleted: ${t.text.substring(0,40)}`,null,true);
 }
 
@@ -1283,7 +1714,7 @@ function editT(id){
   const t=S.todos.find(x=>x.id===id);if(!t)return;
   const nv=prompt('Edit:',t.text);
   if(nv===null||!nv.trim())return;
-  t.text=nv.trim();qS();renderTodos();
+  t.text=nv.trim();qS();renderHomeTodos();renderPlanTodos();
 }
 
 // Manual reorder via up/down buttons (works on all devices incl mobile where HTML5 drag fails)
@@ -1296,14 +1727,14 @@ function moveT(id,dir){
   if(j<0||j>=same.length)return;
   [same[i],same[j]]=[same[j],same[i]];
   S.todos=[...other,...same];
-  qS();renderTodos();
+  qS();renderPlanTodos();
 }
 
 // HTML5 drag (desktop only — still useful on laptop)
 function dS(e,id,cat){drag={id,cat};e.target.closest('.ti').classList.add('dragging')}
 function dE(e){e.target.closest('.ti')?.classList.remove('dragging');document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'))}
 function dO(e,id,cat){e.preventDefault();if(drag.cat!==cat)return;document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));e.currentTarget.classList.add('drag-over')}
-function dR(e,tid,cat){e.preventDefault();document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));if(drag.cat!==cat||drag.id===tid)return;const ci=S.todos.filter(t=>t.category===cat),oi=S.todos.filter(t=>t.category!==cat),di=ci.findIndex(t=>t.id===drag.id),ri=ci.findIndex(t=>t.id===tid);if(di<0||ri<0)return;const[item]=ci.splice(di,1);ci.splice(ri,0,item);S.todos=[...oi,...ci];qS();renderTodos()}
+function dR(e,tid,cat){e.preventDefault();document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));if(drag.cat!==cat||drag.id===tid)return;const ci=S.todos.filter(t=>t.category===cat),oi=S.todos.filter(t=>t.category!==cat),di=ci.findIndex(t=>t.id===drag.id),ri=ci.findIndex(t=>t.id===tid);if(di<0||ri<0)return;const[item]=ci.splice(di,1);ci.splice(ri,0,item);S.todos=[...oi,...ci];qS();renderPlanTodos()}
 
 // Swipe-to-delete support — attached via ontouch* inline handlers on each item.
 // Threshold: 80px left swipe deletes. Visual feedback via .swiping class.
@@ -1335,9 +1766,14 @@ function swEnd(e,id,kind){
 function toggleArchive(){
   S.showArchive=!S.showArchive;
   const b=document.getElementById('arch-tgl');
-  b.textContent=S.showArchive?'Hide Completed':'Show Completed';
-  b.classList.toggle('on',S.showArchive);
-  renderTodos();
+  if(b){b.textContent=S.showArchive?'Hide Completed':'Show Completed';b.classList.toggle('on',S.showArchive)}
+  renderHomeTodos();
+}
+function togglePlanArchive(){
+  S.planShowArchive=!S.planShowArchive;
+  const b=document.getElementById('plan-arch-tgl');
+  if(b){b.textContent=S.planShowArchive?'Hide Completed':'Show Completed';b.classList.toggle('on',S.planShowArchive)}
+  renderPlanTodos();
 }
 
 // Is this completed todo "archived"? (older than 3 days AND S.archiveCompleted on)
@@ -1617,13 +2053,49 @@ function renderDN(){
     html+=`<div class="dn-d ${isToday?'today':''} ${isSel?'sel':''}" onclick="selD('${k}')">
       <div class="dn-dn">${d.toLocaleDateString('en-GB',{weekday:'short'})}</div>
       <div class="dn-dnum">${d.getDate()}</div>
-      <div class="dn-ev">${E(ev)}</div>
+      <div class="dn-ev" onclick="event.stopPropagation();editCalEvent('${k}')" title="Tap to edit event" style="cursor:pointer;min-height:10px">${ev?E(ev):'<span style="opacity:.3">+</span>'}</div>
     </div>`;
   });
   html+=`</div><button class="dn-arr" onclick="navW(1)">›</button>`;
   el.innerHTML=html;
-  // Update label next to title (optional, subtle)
   const lbl=document.querySelector('[data-weeklbl]');if(lbl)lbl.textContent=label;
+}
+
+function editCalEvent(dateKey){
+  const existing=getCal(dateKey);
+  const d=new Date(dateKey+'T00:00:00');
+  const label=d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short'});
+  // Remove any existing modal
+  const prev=document.getElementById('cal-modal-overlay');if(prev)prev.remove();
+  const overlay=document.createElement('div');
+  overlay.id='cal-modal-overlay';overlay.className='cal-modal-overlay';
+  overlay.onclick=e=>{if(e.target===overlay)overlay.remove()};
+  overlay.innerHTML=`<div class="cal-modal">
+    <div class="cal-modal-hd">📅 ${E(label)}</div>
+    <input class="cal-modal-inp" id="cal-ev-inp" placeholder="Event name (leave empty to clear)" value="${E(existing)}" autofocus>
+    <div class="cal-modal-btns">
+      ${existing?`<button onclick="clearCalEvent('${dateKey}')" style="background:var(--red-bg);color:var(--red)">Clear</button>`:''}
+      <button onclick="document.getElementById('cal-modal-overlay').remove()" style="background:var(--card2);color:var(--muted)">Cancel</button>
+      <button onclick="saveCalEvent('${dateKey}')" style="background:var(--gold);color:#fff">Save</button>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+  setTimeout(()=>document.getElementById('cal-ev-inp')?.focus(),50);
+  // Enter key saves
+  overlay.querySelector('#cal-ev-inp').onkeydown=e=>{if(e.key==='Enter')saveCalEvent(dateKey)};
+}
+
+function saveCalEvent(dateKey){
+  const val=document.getElementById('cal-ev-inp')?.value.trim()||'';
+  if(val)S.userCal[dateKey]=val;
+  else S.userCal[dateKey]=''; // empty string = explicitly cleared, overrides DEFAULT_CAL
+  qS();renderDN();renderHoli();
+  document.getElementById('cal-modal-overlay')?.remove();
+}
+function clearCalEvent(dateKey){
+  S.userCal[dateKey]=''; // empty string = cleared, overrides default
+  qS();renderDN();renderHoli();
+  document.getElementById('cal-modal-overlay')?.remove();
 }
 
 function renderHoli(){
@@ -1666,19 +2138,24 @@ function renderAT(){
     {k:'hockey',l:'Hockey',c:'var(--purple)',i:'🏑'}
   ];
   const wkDays=gWk(S.weekOff);
-  // Day-of-week labels (Mon-first) matching gWk() output
   const dayLabels=['M','T','W','T','F','S','S'];
-  // Which days in the current week had each activity?
   const perActivityDays={};
   items.forEach(it=>{
     perActivityDays[it.k]=wkDays.map(d=>(S.activities[fmt(d)]||[]).some(a=>a.type===it.k));
   });
-  // Sum weekly counts
   const wk={gym:0,park:0,golf:0,hockey:0};
   wkDays.forEach(d=>{(S.activities[fmt(d)]||[]).forEach(a=>{if(wk[a.type]!==undefined)wk[a.type]++})});
   const todayIdx=wkDays.findIndex(d=>fmt(d)===TK);
   const weekLbl=S.weekOff===0?'This week':S.weekOff===1?'Next week':S.weekOff===-1?'Last week':`${S.weekOff>0?'+':''}${S.weekOff}w`;
-  let html=`<div class="card-h"><span class="card-l" style="color:var(--gold)">Activities · ${E(weekLbl)}</span><span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace">${E(p.l.split('·')[0].trim())}</span></div><div style="padding:6px 12px 8px">`;
+  // Update the section header badge
+  const badge=document.getElementById('hs-act-info');
+  if(badge){const tot=Object.values(wk).reduce((a,b)=>a+b,0);badge.textContent=tot?`${tot} sessions · ${E(weekLbl)}`:`${E(weekLbl)}`;}
+  // Week nav controls inline at top
+  let html=`<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 12px 4px">
+    <button class="dn-arr" style="width:26px;height:26px;font-size:12px" onclick="navW(-1)">‹</button>
+    <span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace">${E(p.l)}</span>
+    <button class="dn-arr" style="width:26px;height:26px;font-size:12px" onclick="navW(1)">›</button>
+  </div><div style="padding:2px 12px 8px">`;
   items.forEach(it=>{
     const weekT=wk[it.k]||0;
     const tgt=phaseT[it.k]||{min:0,t:0};
@@ -1717,54 +2194,136 @@ function toggleActDay(type,dateKey){
   qS();renderAT();renderStreak();
 }
 
-function renderTodos(){
-  const el=document.getElementById('tg');if(!el)return;
+function renderPlanTodos(){
+  const el=document.getElementById('plan-tg');if(!el)return;
+  const showArch=S.planShowArchive;
   let html='';
   CATS.forEach(cat=>{
     let items=S.todos.filter(t=>t.category===cat.k);
-    if(!S.showArchive)items=items.filter(t=>!isArchived(t));
+    if(!showArch)items=items.filter(t=>!isArchived(t));
     const active=items.filter(t=>!t.completed).length;
-    html+=`<div class="todo-quad">
-      <div class="tq-hd"><span class="tq-t" style="color:${cat.c}">${cat.i} ${cat.l}</span><span class="tq-c">${active}</span></div>
-      <div class="tl">`;
-    if(!items.length){html+=`<div class="empty">No tasks</div>`}
+    const dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    // Date carousel chips — single scrollable row
+    let dateChips='';
+    for(let i=0;i<14;i++){
+      const d=new Date(NOW);d.setDate(d.getDate()+i);
+      const label=i===0?'Today':i===1?'Tmrw':(dayNames[d.getDay()]+' '+d.getDate());
+      const isActive=S.dateSel[cat.k]===i;
+      dateChips+=`<button class="plan-dc${isActive?' active':''}" data-c="${cat.k}" data-d="${i}" onclick="setChip('${cat.k}',${i})">${label}</button>`;
+    }
+    // Date picker for beyond 14 days
+    const pickerVal=typeof S.dateSel[cat.k]==='string'?S.dateSel[cat.k]:'';
+    dateChips+=`<input type="date" style="display:none" id="dp-${cat.k}" value="${pickerVal}" onchange="setChipDate('${cat.k}',this.value)">`;
+    dateChips+=`<button class="plan-dc later" onclick="document.getElementById('dp-${cat.k}').showPicker()" title="Pick specific date">📅</button>`;
+    if(typeof S.dateSel[cat.k]==='string'&&S.dateSel[cat.k]){
+      const ds=new Date(S.dateSel[cat.k]+'T00:00:00');
+      dateChips+=`<button class="plan-dc active" onclick="setChip('${cat.k}',null)">${ds.getDate()} ${ds.toLocaleDateString('en-GB',{month:'short'})} ×</button>`;
+    }
+    // Recur section — collapsible
+    const recurOpen=S.recurOpen&&S.recurOpen[cat.k];
+    const activeRec=S.recMode[cat.k];
+    const recLabel=activeRec?`↻ ${activeRec}`:'Recur';
+    const recChips=['daily','weekly','monthly'].map(r=>`<button class="plan-rc ${S.recMode[cat.k]===r?'active':''}" data-c="${cat.k}" data-t="${r}" onclick="setRec('${cat.k}','${r}')">${r.charAt(0).toUpperCase()+r.slice(1)}</button>`).join('');
+
+    html+=`<div class="plan-col">
+      <div class="plan-col-hd">
+        <span class="plan-col-title" style="color:${cat.c}">${cat.i} ${cat.l}</span>
+        <span class="plan-col-cnt">${active}</span>
+      </div>
+      <div class="plan-items">`;
+    if(!items.length)html+=`<div class="plan-empty">No tasks</div>`;
     items.forEach(t=>{
       const due=fDue(t.dueDate);
-      html+=`<div class="ti" draggable="true" ondragstart="dS(event,'${t.id}','${cat.k}')" ondragend="dE(event)" ondragover="dO(event,'${t.id}','${cat.k}')" ondrop="dR(event,'${t.id}','${cat.k}')"
+      html+=`<div class="plan-item" draggable="true" ondragstart="dS(event,'${t.id}','${cat.k}')" ondragend="dE(event)" ondragover="dO(event,'${t.id}','${cat.k}')" ondrop="dR(event,'${t.id}','${cat.k}')"
         ontouchstart="swStart(event,'${t.id}')" ontouchmove="swMove(event,'${t.id}')" ontouchend="swEnd(event,'${t.id}','todo')" ontouchcancel="swEnd(event,'${t.id}','todo')">
-        <div class="tmov"><span class="tup" onclick="moveT('${t.id}',-1)">▲</span><span class="tdn" onclick="moveT('${t.id}',1)">▼</span></div>
-        <div class="tc ${t.completed?'done':''}" onclick="togT('${t.id}')">${t.completed?'✓':''}</div>
-        <div style="flex:1;min-width:0">
-          <div class="tt ${t.completed?'done':''}">${E(t.text)}</div>
-          <div class="tm">${due?`<span class="td ${due.c}">${E(due.l)}</span>`:''}${t.recurType?`<span class="tr">↻ ${E(t.recurType)}</span>`:''}</div>
-        </div>
-        <span class="te" onclick="editT('${t.id}')">✎</span>
-        <span class="tx" onclick="delT('${t.id}')">×</span>
+        <div class="plan-chk ${t.completed?'done':''}" onclick="togT('${t.id}')">${t.completed?'✓':''}</div>
+        <span class="plan-text ${t.completed?'done':''}" onclick="editT('${t.id}')">${E(t.text)}</span>
+        ${due?`<span class="plan-due" style="color:${due.c==='overdue'?'var(--red)':due.c==='today2'?'var(--green)':'var(--muted)'}">${E(due.l)}</span>`:''}
+        ${t.recurType?`<span class="plan-rec" title="${t.recurType}">↻</span>`:''}
+        <span class="plan-del" onclick="delT('${t.id}')">×</span>
       </div>`;
     });
     html+=`</div>
-      <div class="ta">
-        <div class="ta-r">
-          <input class="ta-i" id="ti-${cat.k}" placeholder="Quick add..." onkeydown="if(event.key==='Enter')addTF('${cat.k}')">
-          <button class="btn-p" onclick="addTF('${cat.k}')">Add</button>
+      <div class="plan-add">
+        <div class="plan-add-row">
+          <input class="plan-add-inp" id="pti-${cat.k}" placeholder="Add task..." onkeydown="if(event.key==='Enter')addTF('${cat.k}')">
+          <button class="plan-add-btn" onclick="addTF('${cat.k}')">Add</button>
         </div>
-        <div class="cr">
-          <span style="font-size:9px;color:var(--dim);margin-right:2px">DUE</span>
-          <span class="ch ad ${S.dateSel[cat.k]===0?'active':''}" data-c="${cat.k}" data-d="0" onclick="setChip('${cat.k}',0)">Today</span>
-          <span class="ch ad ${S.dateSel[cat.k]===1?'active':''}" data-c="${cat.k}" data-d="1" onclick="setChip('${cat.k}',1)">Tomorrow</span>
-          <span class="ch ad ${S.dateSel[cat.k]===7?'active':''}" data-c="${cat.k}" data-d="7" onclick="setChip('${cat.k}',7)">Week</span>
-          <span style="font-size:9px;color:var(--dim);margin:0 2px 0 6px">↻</span>
-          <span class="ch ar ${S.recMode[cat.k]==='daily'?'active':''}" data-c="${cat.k}" data-t="daily" onclick="setRec('${cat.k}','daily')">Daily</span>
-          <span class="ch ar ${S.recMode[cat.k]==='weekly'?'active':''}" data-c="${cat.k}" data-t="weekly" onclick="setRec('${cat.k}','weekly')">Weekly</span>
+        <div class="plan-date-chips">${dateChips}</div>
+        <div class="plan-recur-toggle" onclick="toggleRecurPanel('${cat.k}')">
+          <span class="plan-rchv ${recurOpen?'open':''}">▶</span>
+          <span style="color:${activeRec?'var(--green)':'var(--dim)'}">${recLabel}</span>
         </div>
+        ${recurOpen?`<div class="plan-rec-chips">${recChips}</div>`:''}
       </div>
     </div>`;
   });
   el.innerHTML=html;
 }
 
-// Board activity — replaces the old "Today's Workout" card. Lets the user pick
-// what they're actually doing today and shows purpose-built content for it.
+// Keep renderTodos as alias so any existing references don't break
+function renderTodos(){renderPlanTodos()}
+
+function toggleRecurPanel(cat){
+  if(!S.recurOpen)S.recurOpen={};
+  S.recurOpen[cat]=!S.recurOpen[cat];
+  renderPlanTodos();
+}
+
+// ================================================================
+// BUY LIST
+// ================================================================
+function renderBuyList(){
+  const el=document.getElementById('buy-list');if(!el)return;
+  const f=S.buyFilter||'all';
+  // Update filter button states
+  document.querySelectorAll('.buy-f').forEach(b=>b.classList.toggle('active',b.dataset.bf===f));
+  document.querySelectorAll('.buy-cs').forEach(b=>b.classList.toggle('active',b.dataset.bcs===(S.buyCat||'groceries')));
+  const cats=f==='all'?['groceries','needs','wants']:[f];
+  const catLabels={groceries:'🛒 Groceries',needs:'✅ Needs',wants:'💛 Wants'};
+  let html='';
+  let hasAny=false;
+  cats.forEach(c=>{
+    const items=(S.buys||[]).filter(b=>b.category===c);
+    if(!items.length)return;
+    hasAny=true;
+    html+=`<div class="buy-group-hd">${catLabels[c]}</div>`;
+    items.forEach(b=>{
+      html+=`<div class="buy-item" ontouchstart="swStart(event,'${b.id}')" ontouchmove="swMove(event,'${b.id}')" ontouchend="swEndBuy(event,'${b.id}')" ontouchcancel="swEndBuy(event,'${b.id}')">
+        <div class="buy-chk ${b.done?'done':''}" onclick="togBuy('${b.id}')">${b.done?'✓':''}</div>
+        <span class="buy-text ${b.done?'done':''}">${E(b.text)}</span>
+        <span class="buy-del" onclick="delBuy('${b.id}')">×</span>
+      </div>`;
+    });
+  });
+  el.innerHTML=hasAny?html:`<div class="buy-empty">List is empty${f!=='all'?' for this category':''} — add items above</div>`;
+}
+
+function setBuyFilter(f){S.buyFilter=f;renderBuyList()}
+function setBuyCat(c){S.buyCat=c;renderBuyList()}
+function addBuy(){
+  const inp=document.getElementById('buy-inp');if(!inp)return;
+  const text=inp.value.trim();if(!text)return;
+  S.buys.push({id:uid(),text,category:S.buyCat||'groceries',done:false,addedAt:new Date().toISOString()});
+  qS();inp.value='';renderBuyList();
+}
+function togBuy(id){const b=S.buys.find(x=>x.id===id);if(b){b.done=!b.done;qS();renderBuyList()}}
+function delBuy(id){
+  const i=S.buys.findIndex(x=>x.id===id);if(i<0)return;
+  const[b]=S.buys.splice(i,1);
+  pushUndo({undo:()=>S.buys.splice(i,0,b)});
+  qS();renderBuyList();
+  toast(`Removed: ${b.text}`,null,true);
+}
+function swEndBuy(e,id){
+  const s=swState[id];if(!s)return;
+  const el=s.el;const dx=(e.changedTouches&&e.changedTouches[0])?e.changedTouches[0].clientX-s.x:0;
+  el.style.transition='transform .15s';el.style.transform='';el.classList.remove('swiping');
+  setTimeout(()=>{el.style.transition=''},160);delete swState[id];
+  if(dx<-80)delBuy(id);
+}
+
+// Board activity — no default selection. Pills shown always; body only renders once an activity is chosen.
 function renderBoardActivity(){
   const p=ph();
   const wp=document.getElementById('wp');if(wp)wp.textContent=p.l;
@@ -1782,8 +2341,9 @@ function renderBoardActivity(){
     `<button class="act-pill ${S.boardAct===o.k?'sel':''}" onclick="setBoardAct('${o.k}')" style="${S.boardAct===o.k?`background:${o.c};border-color:${o.c};color:#fff`:`color:${o.c}`}"><span>${o.i}</span><span>${o.l}</span></button>`
   ).join('')+(sug?`<div class="act-sug">Suggested: <b>${E(sug)}</b></div>`:'');
 
-  // Render the body based on which activity is selected
   const body=document.getElementById('act-body');if(!body)return;
+  // If no activity selected yet, show nothing below the pills
+  if(!S.boardAct){body.innerHTML='';return}
   switch(S.boardAct){
     case 'gym':    renderBoardGym(body); break;
     case 'park':   renderBoardPark(body); break;
@@ -1794,7 +2354,11 @@ function renderBoardActivity(){
   }
 }
 
-function setBoardAct(a){S.boardAct=a;qS();renderBoardActivity()}
+function setBoardAct(a){
+  // Tap the active pill again to deselect
+  S.boardAct=S.boardAct===a?null:a;
+  qS();renderBoardActivity();
+}
 
 // ---- Gym view on the board (same content as before, rendered inline) ----
 function renderBoardGym(body){
@@ -2723,9 +3287,10 @@ function updateCoursePar(id,i,val){
 
 function renderAll(){
   renderHdr();renderHR();renderDN();renderHoli();renderWR();
-  renderAT();renderTodos();renderBoardActivity();renderNut();renderMood();
+  renderAT();renderHomeTodos();renderHomeBuyList();renderBoardActivity();renderNut();renderMood();
   renderCt();renderNT();renderWT();renderWt();renderInj();renderStreak();renderMJ();
   renderRecList();renderCourseList();
+  applyHSSections();
 }
 
 // ================================================================
@@ -2733,11 +3298,12 @@ function renderAll(){
 // ================================================================
 function switchTab(tab){
   document.querySelectorAll('.hd-tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));
-  ['life','health','workouts','nutrition','content'].forEach(t=>{
+  ['life','plan','health','workouts','nutrition','content'].forEach(t=>{
     const el=document.getElementById('tab-'+t);if(el)el.style.display=t===tab?'block':'none';
   });
   // Refresh data-driven tabs on switch
-  if(tab==='workouts')renderWT();
+  if(tab==='plan'){renderPlanTodos();renderBuyList()}
+  else if(tab==='workouts')renderWT();
   else if(tab==='nutrition')renderNT();
   else if(tab==='health'){renderWt();renderInj();renderStreak();renderMJ()}
   else if(tab==='content')renderCt();
@@ -2754,10 +3320,18 @@ loadState();
     const p=document.getElementById('sync-pat');if(p)p.value=S.sync.pat||'';
     const g=document.getElementById('sync-gist');if(g)g.value=S.sync.gistId||'';
   }
+  // Populate API key field if saved
+  const ak=getAK();
+  const akInp=document.getElementById('ak-inp');if(akInp&&ak)akInp.value=ak;
+  const akSt=document.getElementById('ak-status');if(akSt&&ak)akSt.textContent='✓ Key loaded';
   setHoli(S.holiMode||'auto');
   applyTheme();
-  // If today's Board is what the user wants, default selDate to today
   if(!S.selDate)S.selDate=TK;
+  // Default boardAct to null (no activity pre-selected) for new users
+  if(S.boardAct===undefined)S.boardAct=null;
+  // Init home section open state
+  if(!S.homeOpen)S.homeOpen={tasks:true,nutrition:true,activities:true,buylist:true,todayact:true};
+  applyHSSections();
 })();
 // Midnight rollover check every 60 seconds
 setInterval(refreshNow,60000);
