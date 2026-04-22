@@ -90,7 +90,8 @@ html.dark #hdr,html:not(.light) #hdr{background:rgba(23,26,34,.88)}
 .hr-s{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:8px 12px;text-align:center;box-shadow:var(--sh);flex:1;min-width:70px;position:relative;cursor:pointer}
 .hr-s:hover{border-color:var(--border2)}
 .hr-l{font-size:8.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.hr-v{font-size:17px;font-weight:800;font-family:'JetBrains Mono',monospace}
+.hr-v{font-size:17px;font-weight:800;font-family:'JetBrains Mono',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hr-v.sm{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hr-sub{font-size:9px;color:var(--dim)}
 .hr-spark{width:100%;height:18px;margin-top:3px;display:block}
 
@@ -509,13 +510,8 @@ input[type="file"]{display:none}
 .err-corner{position:fixed;bottom:16px;right:16px;max-width:360px;background:var(--red-bg);border:1.5px solid var(--red);color:var(--red);padding:10px 14px;border-radius:var(--r);font-family:'JetBrains Mono',monospace;font-size:11px;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.15)}
 .err-corner button{background:none;border:none;color:var(--red);cursor:pointer;float:right;font-size:14px;font-weight:700}
 
-/* HOME TASKS CARD */
-.htask-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:14px}
-.htask-hd{padding:9px 12px 8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.htask-title{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);flex:1}
-.htask-cnt{background:var(--gold-bg);color:var(--gold);font-size:10px;font-weight:800;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:10px}
-.htask-day-pills{display:flex;gap:4px}
-.htask-day-pill{padding:4px 11px;border-radius:20px;font-size:10px;font-weight:700;border:1.5px solid var(--border);background:var(--card2);color:var(--muted);cursor:pointer;transition:all .12s;font-family:'DM Sans',sans-serif}
+/* HOME TASKS — content area only (header is hs-hd) */
+.htask-day-pill{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;border:1.5px solid var(--border);background:rgba(255,255,255,.15);color:var(--muted);cursor:pointer;transition:all .12s;font-family:'DM Sans',sans-serif}
 .htask-day-pill.active{background:var(--gold);border-color:var(--gold);color:#fff}
 .htask-cat-filter{display:flex;gap:3px;flex-wrap:wrap;padding:6px 12px;border-bottom:1px solid var(--border);background:var(--card2)}
 .hcat-chip{padding:3px 9px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.5px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .1s;font-family:'DM Sans',sans-serif;text-transform:uppercase}
@@ -535,10 +531,11 @@ input[type="file"]{display:none}
 .htask-due{font-size:9px;font-weight:600;font-family:'JetBrains Mono',monospace}
 .htask-del{color:var(--dim);cursor:pointer;font-size:14px;padding:0 4px;flex-shrink:0;line-height:1}
 .htask-del:hover{color:var(--red)}
-.htask-add{display:flex;gap:6px;padding:8px 12px;border-top:1px solid var(--border);background:var(--card2)}
-.htask-add input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:6px 10px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none}
+.htask-add{display:flex;gap:6px;padding:8px 12px;border-top:1px solid var(--border);background:var(--card2);align-items:center}
+.htask-add input{flex:1;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:6px 10px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none}
 .htask-add input:focus{border-color:var(--gold)}
-.htask-add button{background:linear-gradient(135deg,#f0b429,#d9a020);border:none;border-radius:var(--rs);padding:6px 14px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif}
+.htask-add select{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:6px 6px;font-size:11px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;flex-shrink:0}
+.htask-add button{background:linear-gradient(135deg,#f0b429,#d9a020);border:none;border-radius:var(--rs);padding:6px 14px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;flex-shrink:0}
 
 /* HOME SECTIONS — collapsible */
 .hs-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:10px}
@@ -568,7 +565,10 @@ input[type="file"]{display:none}
 .plan-rec-chips{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px;padding-top:4px;border-top:1px dashed var(--border)}
 .plan-rc{padding:3px 9px;border-radius:12px;font-size:9px;font-weight:700;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .1s}
 .plan-rc.active{background:var(--green);border-color:var(--green);color:#fff}
-@media(max-width:900px){.plan-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* PLAN TAB layout — 2×2 on desktop, 1 col on mobile */
+.plan-wrap{max-width:900px;margin:0 auto}
+.plan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
 @media(max-width:500px){.plan-grid{grid-template-columns:1fr}}
 .plan-col{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
 .plan-col-hd{padding:9px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
@@ -656,7 +656,7 @@ window.onerror=function(m,s,l,c,e){
 <div class="cmd-bar">
   <div class="cmd-wrap">
     <span style="font-size:14px">⚡</span>
-    <input class="cmd-input" id="cmd-in" placeholder='Ask Jarvis — "chicken fajitas" · "mow lawn saturday" · "weight 128.5"' onkeydown="if(event.key==='Enter')runCmd()">
+    <input class="cmd-input" id="cmd-in" placeholder='Ask Jarvis — "chicken fajitas" · "mow lawn saturday"' onkeydown="if(event.key==='Enter')runCmd()">
     <button class="mic-btn" id="mic-btn" onclick="toggleVoice()" title="Voice input">🎤</button>
     <button class="cmd-btn" id="cmd-btn" onclick="runCmd()">Go</button>
   </div>
@@ -675,7 +675,7 @@ window.onerror=function(m,s,l,c,e){
       <div class="hs-hd" onclick="toggleHS('tasks')">
         <span class="hs-icon">✓</span>
         <span class="hs-title">Today's Tasks</span>
-        <span id="hs-tasks-info" class="hs-badge"></span>
+        <span id="hs-tasks-info" class="hs-badge" style="display:flex;align-items:center;gap:4px"></span>
         <span class="hs-chv" id="hs-chv-tasks">▾</span>
       </div>
       <div class="hs-body" id="hs-body-tasks">
@@ -1619,26 +1619,26 @@ function renderHomeTodos(){
   const el=document.getElementById('htask-wrap');if(!el)return;
   const {today,tomorrow}=S.homeTodoDays||{today:true,tomorrow:false};
   const catF=S.homeTodoCat||'all';
-  // Build date set to show
   const dates=[];
   if(today)dates.push(TK);
   if(tomorrow)dates.push(dOff(1));
-  // Get visible todos
   let items=S.todos.filter(t=>{
     if(isArchived(t))return false;
     if(catF!=='all'&&t.category!==catF)return false;
-    if(!dates.length)return !t.completed; // if no day selected, show all active
+    if(!dates.length)return !t.completed;
     return t.dueDate&&dates.includes(t.dueDate);
   });
-  // Sort: due date first (today before tomorrow), then category priority, then manual order
   items.sort((a,b)=>{
     const da=a.dueDate||'9999',db=b.dueDate||'9999';
     if(da!==db)return da<db?-1:1;
     return (CAT_SORT[a.category]??3)-(CAT_SORT[b.category]??3);
   });
   const activeCount=items.filter(t=>!t.completed).length;
-  const todayActive=today?`<button class="htask-day-pill ${today?'active':''}" onclick="toggleHomeTodayDay('today')" style="${today?'':''}">Today</button>`:'<button class="htask-day-pill" onclick="toggleHomeTodayDay(\'today\')">Today</button>';
-  const tomorrowActive=`<button class="htask-day-pill ${tomorrow?'active':''}" onclick="toggleHomeTodayDay('tomorrow')">Tomorrow</button>`;
+  // Update the hs-wrap header badge & day pills — injected into the hs-hd via dedicated spans
+  const badge=document.getElementById('hs-tasks-info');
+  if(badge)badge.innerHTML=`<span style="background:var(--gold-bg);color:var(--gold);font-size:10px;font-weight:800;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:10px;margin-right:4px">${activeCount}</span>`+
+    `<button class="htask-day-pill ${today?'active':''}" onclick="event.stopPropagation();toggleHomeTodayDay('today')">Today</button>`+
+    `<button class="htask-day-pill ${tomorrow?'active':''}" onclick="event.stopPropagation();toggleHomeTodayDay('tomorrow')">Tomorrow</button>`;
   // Cat filter chips
   const cats=[{k:'all',l:'All'},{k:'work',l:'Work'},{k:'health',l:'Health'},{k:'house',l:'House'},{k:'life',l:'Life'}];
   const catChips=cats.map(c=>`<button class="hcat-chip ${catF===c.k?'active':''}" onclick="setHomeTodoCat('${c.k}')">${c.l}</button>`).join('');
@@ -1664,22 +1664,18 @@ function renderHomeTodos(){
       </div>`;
     });
   }
-  el.innerHTML=`<div class="htask-card">
-    <div class="htask-hd">
-      <span class="htask-title">Today's Tasks</span>
-      <span class="htask-cnt">${activeCount}</span>
-      <div class="htask-day-pills">
-        <button class="htask-day-pill ${today?'active':''}" onclick="toggleHomeTodayDay('today')">Today</button>
-        <button class="htask-day-pill ${tomorrow?'active':''}" onclick="toggleHomeTodayDay('tomorrow')">Tomorrow</button>
-      </div>
-    </div>
-    <div class="htask-cat-filter">${catChips}</div>
+  el.innerHTML=`<div class="htask-cat-filter">${catChips}</div>
     <div class="htask-list">${listHtml}</div>
     <div class="htask-add">
       <input id="htask-inp" placeholder="Quick add task..." onkeydown="if(event.key==='Enter')addHomeTodo()">
+      <select id="htask-cat" style="background:var(--card2);border:1px solid var(--border);border-radius:var(--rs);padding:6px 8px;font-size:11px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;cursor:pointer">
+        <option value="life">Life</option>
+        <option value="work">Work</option>
+        <option value="health">Health</option>
+        <option value="house">House</option>
+      </select>
       <button onclick="addHomeTodo()">Add</button>
-    </div>
-  </div>`;
+    </div>`;
 }
 
 function toggleHomeTodayDay(day){
@@ -1692,8 +1688,10 @@ function togHT(id){const t=S.todos.find(x=>x.id===id);if(t){t.completed=!t.compl
 function addHomeTodo(){
   const inp=document.getElementById('htask-inp');if(!inp)return;
   const text=inp.value.trim();if(!text)return;
+  const catEl=document.getElementById('htask-cat');
+  const category=catEl?catEl.value:'life';
   const dueDate=(S.homeTodoDays&&S.homeTodoDays.today)?TK:(S.homeTodoDays&&S.homeTodoDays.tomorrow)?dOff(1):null;
-  S.todos.push({id:uid(),category:'life',text,dueDate,completed:false,createdAt:new Date().toISOString()});
+  S.todos.push({id:uid(),category,text,dueDate,completed:false,createdAt:new Date().toISOString()});
   qS();inp.value='';renderHomeTodos();renderPlanTodos();
 }
 
@@ -2035,7 +2033,7 @@ function renderHR(){
     <div class="hr-s" onclick="logWeightPrompt()"><div class="hr-l">Weight</div><div class="hr-v" style="color:var(--gold)">${S.curWeight}<span style="font-size:10px">kg</span></div><div class="hr-sub">Target ${TW}kg</div></div>
     <div class="hr-s" onclick="switchTab('health')"><div class="hr-l">Lost</div><div class="hr-v" style="color:var(--green)">-${lo}<span style="font-size:10px">kg</span></div>${spark||'<div class="hr-sub">'+p+'% to goal</div>'}</div>
     <div class="hr-s" onclick="switchTab('health')"><div class="hr-l">Injection</div><div class="hr-v" style="color:var(--purple)">${dose()}</div><div class="hr-sub">Wk ${w}</div></div>
-    <div class="hr-s" onclick="switchTab('workouts')"><div class="hr-l">Phase</div><div class="hr-v" style="color:var(--accent)">${ph().l.split('·')[1]?ph().l.split('·')[1].trim():'-'}</div><div class="hr-sub">Wk ${w}/29</div></div>
+    <div class="hr-s" onclick="switchTab('workouts')"><div class="hr-l">Phase</div><div class="hr-v sm" style="color:var(--accent)">${ph().l.split('·')[1]?ph().l.split('·')[1].trim():'-'}</div><div class="hr-sub">Wk ${w}/29</div></div>
     <div class="hr-s"><div class="hr-l">Job start</div><div class="hr-v" style="color:var(--teal)">${dLeft()}<span style="font-size:10px">d</span></div><div class="hr-sub">2 Nov</div></div>
   `;
 }
@@ -2640,14 +2638,15 @@ function recentSetLogs(exName,limit){
 
 function renderNut(){
   const dateShow=document.getElementById('nd');
-  if(dateShow){dateShow.textContent=S.selDate===TK?'Today':new Date(S.selDate+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'})}
-  const nbars=document.getElementById('nbars');if(!nbars)return;
   const t=S.nutrition[S.selDate]||{meals:[],targets:nutTargets(S.selDate)};
   const tgts=nutTargets(S.selDate);
   const cals=t.meals.reduce((s,m)=>s+(m.cals||0),0);
   const prot=t.meals.reduce((s,m)=>s+(m.protein||0),0);
+  // Update hs-badge with cal/protein summary (visible even when collapsed)
+  if(dateShow){dateShow.textContent=`${cals} kcal · ${prot}g protein`;}
   const cPct=Math.min(100,Math.round(cals/tgts.cals*100));
   const pPct=Math.min(100,Math.round(prot/tgts.protein*100));
+  const nbars=document.getElementById('nbars');if(!nbars)return;
   nbars.innerHTML=`
     <div class="ng"><div class="nl">Calories</div><div class="nbb"><div class="nbf" style="width:${cPct}%;background:${cals>tgts.cals*1.1?'var(--red)':'var(--green)'}"></div></div><div class="nn"><b>${cals}</b>/${tgts.cals}</div></div>
     <div class="ng"><div class="nl">Protein</div><div class="nbb"><div class="nbf" style="width:${pPct}%;background:${prot>=tgts.protein?'var(--green)':'var(--amber)'}"></div></div><div class="nn"><b>${prot}</b>/${tgts.protein}g</div></div>
